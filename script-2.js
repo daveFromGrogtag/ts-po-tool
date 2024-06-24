@@ -40,19 +40,19 @@ function joinWithLineBreaks(arr, itemsPerLine) {
 function joinAsHtmlTable(arr, itemsPerLine) {
     let result = '<tr>';
     if (itemsPerLine === 6) {
-        result = '<tr><th>Size</th><th>SKU</th><th>OS</th><th>Total</th><th>Price</th><th>Extended</th><th>Image</th></tr><tr>'
+        result = '<tr><th>Size</th><th>SKU</th><th>OS</th><th>Total</th><th>Price</th><th>Extended</th><th>Image</th><th>Notes</th></tr><tr>'
     }
     if (itemsPerLine === 8) {
-        result = '<tr><th>Size</th><th>SKU</th><th>OS</th><th>Total</th><th>Price</th><th>Extended</th><th>UPC-Number</th><th>UPC-Price</th><th>Image</th></tr><tr>'
+        result = '<tr><th>Size</th><th>SKU</th><th>OS</th><th>Total</th><th>Price</th><th>Extended</th><th>UPC-Number</th><th>UPC-Price</th><th>Image</th><th>Notes</th></tr><tr>'
     }
     for (let i = 0; i < arr.length; i++) {
         result += `<td>${arr[i]}</td>`;
 
 
         if ((i + 1) % itemsPerLine === 0 && i !== arr.length - 1) {
-            result += '<td><div class="table-image"><img src="./No-Image-01.png"></div></td></tr><tr>';
+            result += '<td><div class="table-image"><img src="./No-Image-01.png"></div></td><td></td></tr><tr>';
         } else if ((i + 1) % itemsPerLine === 0 && i === arr.length - 1) {
-            result += '<td><div class="table-image"><img src="./No-Image-01.png"></div></td></tr>';
+            result += '<td><div class="table-image"><img src="./No-Image-01.png"></div></td><td></td></tr>';
         } else if (i !== arr.length - 1) {
             result += '';
         }
@@ -80,7 +80,7 @@ function pageSplit(text) {
     let columnCount = countColumns(combinedArray);
     let csvFormat = joinWithLineBreaks(combinedArray, columnCount)
     let formattedTable = joinAsHtmlTable(combinedArray, columnCount)
-    downloadTextFile('test.csv', csvFormat)
+        // downloadTextFile('test.csv', csvFormat)
 
     document.getElementById('parsed-text').innerHTML = formattedTable;
 }
