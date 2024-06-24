@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <link rel="stylesheet" href="./style-2.css">
+</head>
+
+<body>
+    <h1>Techstyles PO Tool</h1>
+    <p class="instructions">Upload files below.</p>
+    <section class="upload-area">
+        <input type="file" name="po-upload" id="po-upload">
+    </section>
+    <section class="order-data">
+        <div id="po-data"></div>
+        <div>
+            <div id="shipping-info"></div>
+            <div id="additional-instructions"></div>
+        </div>
+    </section>
+    <section class="item-data">
+        <div id="parsed-text">
+            <div style="text-align: center; margin: 1rem; padding: 2rem; background: white;">No info yet</div>
+        </div>
+    </section>
+    <div id="csv-link"></div>
+    <script src="./script-2.js"></script>
+</body>
+
+</html>

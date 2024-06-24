@@ -1,0 +1,119 @@
+html {
+    font-family: Arial, sans-serif;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* Ensures borders are collapsed */
+    margin: 20px 0;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333;
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+
+/* #parsed-text td {
+    padding: 0;
+}
+
+td input {
+    border: none;
+    background: none;
+    padding: 10px;
+} */
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+.order-data {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#po-data {
+    width: 100%;
+    max-width: 450px;
+}
+
+#shipping-info {
+    width: 100%;
+    max-width: 450px;
+}
+
+#po-upload {
+    background: #eeeeee;
+    padding: 2rem;
+    border-radius: 5px;
+    border: #bbb dashed 2px;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 1.25rem;
+    margin: auto;
+}
+
+#po-upload:hover {
+    box-shadow: #333 0px 0px 5px;
+}
+
+#po-upload::file-selector-button {
+    padding: 1rem;
+    background: lightcoral;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+}
+
+#po-upload::file-selector-button:hover {
+    opacity: .7;
+    border: none;
+}
+
+.upload-area {
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+body {
+    max-width: 1000px;
+    margin: auto;
+}
+
+@media print {
+    h1 {
+        display: none;
+    }
+    #po-upload {
+        display: none;
+    }
+    #csv-link {
+        display: none;
+    }
+    .instructions {
+        display: none;
+    }
+}
