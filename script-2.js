@@ -108,13 +108,12 @@ function getPoData(text) {
     const vendorRegex = /Vendor#[ ]{1,}[\w\d]{1,}/
     const enteredByRegex = /Entered By[ ]{1,}[\w\d]{1,}/
     const additionalInstructionsRegex = /Additional Instructions[\w \:\.\-]{0,}/
-        // console.log(text);
 
     let orderNumber = text.match(orderNumberRegex)[0].replace(/Order#[ ]{1,}/, "")
     let poDate = text.match(poDateRegex)[0].replace(/PO Date[ ]{1,}/, "")
     let vendor = text.match(vendorRegex)[0].replace(/Vendor#[ ]{1,}/, "")
     let enteredBy = text.match(enteredByRegex)[0].replace(/Entered By[ ]{1,}/, "")
-    let additionalInstructions = text.match(additionalInstructionsRegex) ? text.match(additionalInstructionsRegex)[0].replace(/Total [\w \.]{1,}/, "") : ""
+    let additionalInstructions = text.match(additionalInstructionsRegex) ? text.match(additionalInstructionsRegex)[0].replace(/Total [\w \.]{1,}/, "").replace(/Additional Instructions:[ ]{0,}/, "") : ""
 
     const startShipToRegex = /Ship To: [ ]{0,}/;
     const endShipToRegex = /[]{0,} Ship Date/;
