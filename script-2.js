@@ -175,6 +175,18 @@ function downloadTextFile(filename, text) {
     // URL.revokeObjectURL(url);
 }
 
+// function changeTextModal(text, outerEvent) {
+//     const changeModal = document.getElementById('change-text-modal')
+//     const changeInput = document.getElementById('change-text-input')
+//     const changeButton = document.getElementById('change-text-button')
+//     changeInput.value = text
+//     changeModal.classList.toggle('hidden')
+//     changeButton.addEventListener('click', () => {
+//         changeModal.classList.toggle('hidden')
+//         outerEvent.target.innerText = changeInput.value
+//     })
+
+// }
 
 async function extractTextFromPDF(pdfData) {
     const pdf = await pdfjsLib.getDocument({
@@ -217,7 +229,8 @@ document.getElementById('parsed-text').addEventListener('click', function(event)
     // Change table values
     if (event.target.tagName.toLowerCase() === 'td') {
         console.log(event.target.innerText);
-        event.target.innerText = prompt("New Data", event.target.innerText)
+        event.target.innerText = prompt("Change Field", event.target.innerText)
+            // changeTextModal(event.target.innerText, event)
     }
     // Change table images
     if (event.target.tagName.toLowerCase() === 'img') {

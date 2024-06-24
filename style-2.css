@@ -112,6 +112,40 @@ body {
     display: none;
 }
 
+.hidden {
+    display: none;
+}
+
+
+/* #change-text-modal #change-text-outer {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #222222dd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+#change-text-inner {
+    background: #ddd;
+    padding: 2rem;
+    border-radius: 5px;
+}
+
+#change-text-input {
+    padding: 10px;
+    font-size: 1.25rem;
+}
+
+#change-text-button {
+    font-size: 1.25rem;
+    padding: 10px 25px;
+} */
+
 @media print {
     h1 {
         display: none;
