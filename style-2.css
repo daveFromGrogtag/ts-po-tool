@@ -103,6 +103,15 @@ body {
     margin: auto;
 }
 
+.table-image img {
+    height: 100px;
+    width: auto;
+}
+
+#image-selector {
+    display: none;
+}
+
 @media print {
     h1 {
         display: none;

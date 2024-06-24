@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TS PO Tool</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="./style-2.css">
 </head>
 
@@ -24,10 +25,14 @@
     </section>
     <section class="item-data">
         <div id="parsed-text">
-            <div style="text-align: center; margin: 1rem; padding: 2rem; background: white;">No info yet</div>
+            <div style="text-align: center; margin: 1rem; padding: 2rem; border: 2px #bbb dashed; border-radius: 5px; text-transform: uppercase; font-weight: bold;">No info yet</div>
         </div>
     </section>
-    <div id="csv-link"></div>
+    <button onclick="exportTableToExcel('item-data-table', 'myExcelFile')">Export Table to Excel</button>
+
+    <input type="file" name="image-selector" id="image-selector" />
+
+    <!-- <div id="csv-link"></div> -->
     <script src="./script-2.js"></script>
 </body>
 

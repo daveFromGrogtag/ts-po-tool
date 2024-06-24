@@ -18,10 +18,6 @@ function countColumns(arr) {
     let rowCount = countRows(arr);
     let cellCount = arr.length;
     let columnCount = cellCount / rowCount
-    console.log(`rowCount: ${rowCount}
-        cellCount: ${cellCount}
-        columnCount: ${columnCount}`);
-    console.log(arr);
     return columnCount
 }
 
@@ -44,23 +40,24 @@ function joinWithLineBreaks(arr, itemsPerLine) {
 function joinAsHtmlTable(arr, itemsPerLine) {
     let result = '<tr>';
     if (itemsPerLine === 6) {
-        result = '<tr><th>Size</th><th>SKU</th><th>OS</th><th>Total</th><th>Price</th><th>Extended</th></tr><tr>'
+        result = '<tr><th>Size</th><th>SKU</th><th>OS</th><th>Total</th><th>Price</th><th>Extended</th><th>Image</th></tr><tr>'
     }
     if (itemsPerLine === 8) {
-        result = '<tr><th>Size</th><th>SKU</th><th>OS</th><th>Total</th><th>Price</th><th>Extended</th><th>UPC-Number</th><th>UPC-Price</th></tr><tr>'
+        result = '<tr><th>Size</th><th>SKU</th><th>OS</th><th>Total</th><th>Price</th><th>Extended</th><th>UPC-Number</th><th>UPC-Price</th><th>Image</th></tr><tr>'
     }
     for (let i = 0; i < arr.length; i++) {
-        // result += `<td><input type=text value="${arr[i]}"/></td>`;
         result += `<td>${arr[i]}</td>`;
 
 
         if ((i + 1) % itemsPerLine === 0 && i !== arr.length - 1) {
-            result += '</tr><tr>';
+            result += '<td><div class="table-image"><img src="./No-Image-01.png"></div></td></tr><tr>';
+        } else if ((i + 1) % itemsPerLine === 0 && i === arr.length - 1) {
+            result += '<td><div class="table-image"><img src="./No-Image-01.png"></div></td></tr>';
         } else if (i !== arr.length - 1) {
             result += '';
         }
     }
-    return `<table>${result}</table>`
+    return `<table id="item-data-table">${result}</table>`
 }
 
 function textParse(text) {
@@ -154,7 +151,6 @@ function getPoData(text) {
     document.getElementById('po-data').innerHTML = poDataHtml
     document.getElementById('shipping-info').innerHTML = shipDataHtml
     document.getElementById('additional-instructions').innerHTML = additionalInstructionsHtml
-    console.log(infoArray);
 }
 
 function downloadTextFile(filename, text) {
@@ -205,7 +201,7 @@ document.getElementById('po-upload').addEventListener('change', async(event) => 
         reader.onload = async(e) => {
             const pdfData = new Uint8Array(e.target.result);
             const extractedText = await extractTextFromPDF(pdfData);
-            console.log(extractedText);
+            // console.log(extractedText);
             pageSplit(extractedText)
                 // textParse(extractedText)
         };
@@ -216,9 +212,45 @@ document.getElementById('po-upload').addEventListener('change', async(event) => 
     }
 });
 
+// Change Data on Sheet
 document.getElementById('parsed-text').addEventListener('click', function(event) {
+    // Change table values
     if (event.target.tagName.toLowerCase() === 'td') {
         console.log(event.target.innerText);
         event.target.innerText = prompt("New Data", event.target.innerText)
     }
+    // Change table images
+    if (event.target.tagName.toLowerCase() === 'img') {
+        window.currentImageElement = event.target;
+        imageInput = document.getElementById('image-selector')
+        imageInput.click()
+        console.log(event.target);
+    }
 });
+
+// Image selector for Chaning Table images
+document.getElementById('image-selector').addEventListener('change', () => {
+    console.log('Selecting New Image');
+    const file = imageInput.files[0];
+    if (file && file.type.startsWith('image/')) {
+        console.log('Image is type image');
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            console.log(e.target.result);
+            window.currentImageElement.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    } else {
+        alert('Please select a valid image file.');
+    }
+    imageInput.value = '';
+})
+
+function exportTableToExcel(tableID, filename = '') {
+    // Select the table
+    var table = document.getElementById(tableID);
+    var workbook = XLSX.utils.table_to_book(table, { sheet: "Sheet JS" });
+
+    // Generate XLSX file and trigger download
+    XLSX.writeFile(workbook, filename ? filename + '.xlsx' : 'exported_table.xlsx');
+}
