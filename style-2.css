@@ -1,5 +1,6 @@
 html {
     font-family: Arial, sans-serif;
+    font-size: .75rem;
 }
 
 table {
@@ -48,8 +49,7 @@ tr:hover {
 }
 
 #po-data {
-    width: 100%;
-    max-width: 450px;
+    width: 45%;
 }
 
 #shipping-info {
@@ -145,6 +145,18 @@ body {
     font-size: 1.25rem;
     padding: 10px 25px;
 } */
+
+#orderList {
+    font-size: 1.25rem;
+    list-style-type: none;
+    margin: auto;
+}
+
+#orderList td a {
+    padding: .25rem;
+    display: block;
+    font-weight: bold;
+}
 
 @media print {
     h1 {

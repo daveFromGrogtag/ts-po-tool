@@ -7,28 +7,53 @@
     <title>TS PO Tool</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="./style-2.css">
 </head>
 
 <body>
-    <h1>Techstyles PO Tool</h1>
+    <header>
+        <h1>Techstyles PO Tool</h1>
+        <nav>
+            <ul>
+                <li>
+                    <a onclick="exportTableToExcel('item-data-table', 'myExcelFile')">Excel</a>
+                </li>
+                <li>
+                    <a onclick="downloadPDF()">PDF</a>
+                </li>
+                <li>
+                    <a id="saveOrderButton">Save Order</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="tool-bar">
+            <button onclick="exportTableToExcel('item-data-table', 'myExcelFile')">Excel</button>
+            <button onclick="downloadPDF()">PDF</button>
+            <button id="saveOrderButton">Save Order</button>
+
+        </div>
+    </header>
     <p class="instructions">Upload files below.</p>
     <section class="upload-area">
         <input type="file" name="po-upload" id="po-upload">
     </section>
-    <section class="order-data">
-        <div id="po-data"></div>
-        <div>
-            <div id="shipping-info"></div>
-            <div id="additional-instructions"></div>
-        </div>
-    </section>
-    <section class="item-data">
-        <div id="parsed-text">
-            <div style="text-align: center; margin: 1rem; padding: 2rem; border: 2px #bbb dashed; border-radius: 5px; text-transform: uppercase; font-weight: bold;">No info yet</div>
-        </div>
-    </section>
-    <button onclick="exportTableToExcel('item-data-table', 'myExcelFile')">Export Table to Excel</button>
+    <main id="content">
+        <section class="po-header"></section>
+        <section class="order-data">
+            <div id="po-data"></div>
+            <div>
+                <div id="shipping-info"></div>
+                <div id="additional-instructions"></div>
+            </div>
+        </section>
+        <section class="item-data">
+            <div id="parsed-text">
+                <div style="text-align: center; margin: 1rem; padding: 2rem; border: 2px #bbb dashed; border-radius: 5px; text-transform: uppercase; font-weight: bold;">No info yet</div>
+            </div>
+        </section>
+    </main>
+
 
     <div id="change-text-modal" class="hidden">
         <div id="change-text-outer">
@@ -43,6 +68,9 @@
 
     <!-- <div id="csv-link"></div> -->
     <script src="./script-2.js"></script>
+
+    <script type="module" src="./data-script.js"></script>
+
 </body>
 
 </html>

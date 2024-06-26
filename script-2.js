@@ -127,11 +127,11 @@ function getPoData(text) {
     let phone = infoArray[4]
 
     let poDataHtml = `<table>
-    <tr><th>PoNumber:</th><td>${orderNumber}</td></tr>
-    <tr><th>PO Date:</th><td>${poDate}</td></tr>
+    <tr><th>PoNumber:</th><td id="orderId">${orderNumber}</td></tr>
+    <tr><th>PO Date:</th><td id="poDate">${poDate}</td></tr>
     <tr><th>Vendor:</th><td>${vendor}</td></tr>
     <tr><th>Entered By:</th><td>${enteredBy}</td></tr>
-    <tr><th>Ship Date:</th><td>${shipDate}</td></tr>
+    <tr><th>Ship Date:</th><td id="shipDate">${shipDate}</td></tr>
     <tr><th>Expected:</th><td>${expectedOn}</td></tr>
     <tr><th>Terms:</th><td>${terms}</td></tr>
     <tr><th>Ship Via:</th><td>${shipVia}</td></tr>
@@ -266,4 +266,18 @@ function exportTableToExcel(tableID, filename = '') {
 
     // Generate XLSX file and trigger download
     XLSX.writeFile(workbook, filename ? filename + '.xlsx' : 'exported_table.xlsx');
+}
+
+function downloadPDF() {
+    // Get the HTML content from the specified element
+    const element = document.getElementById('content');
+
+    // Use html2pdf to generate the PDF
+    html2pdf(element, {
+        margin: 1,
+        filename: 'document.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    });
 }

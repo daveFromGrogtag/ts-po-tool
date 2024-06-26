@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TS Order Info</title>
+    <link rel="stylesheet" href="./style-2.css">
+</head>
+
+<body>
+    <h1>Order Info</h1>
+    <a id="saveOrderButton">Save Order</a>
+    <div>
+        <label for="order-status">Order Status</label>
+        <select name="order-status" id="order-status">
+            <option value="open">Open</option>
+            <option value="shipped">Shipped</option>
+            <option value="printing">Printing</option>
+            <option value="cutting">Cutting</option>
+            <option value="closed">Closed</option>
+            <option value="reprint">Reprint</option>
+        </select>
+    </div>
+    <div id="orderInfo">
+        <h2>No data found</h2>
+    </div>
+
+    <input type="file" name="image-selector" id="image-selector" />
+    <script type="module" src="./order-script.js"></script>
+</body>
+
+</html>
