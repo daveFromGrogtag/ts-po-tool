@@ -6,23 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TS Order Info</title>
     <link rel="stylesheet" href="./style-2.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 </head>
 
 <body>
-    <h1>Order Info</h1>
-    <a id="saveOrderButton">Save Order</a>
-    <div>
-        <label for="order-status">Order Status</label>
-        <select name="order-status" id="order-status">
-            <option value="open">Open</option>
-            <option value="shipped">Shipped</option>
-            <option value="printing">Printing</option>
-            <option value="cutting">Cutting</option>
-            <option value="closed">Closed</option>
-            <option value="reprint">Reprint</option>
-        </select>
-    </div>
-    <div id="orderInfo">
+    <header>
+        <h1>Order Info</h1>
+        <nav>
+            <ul>
+                <li>
+                    <a href="./index.html">Home</a>
+                </li>
+                <li>
+                    <a href="./order-list.html">Order List</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="tool-bar">
+            <!-- <button onclick="exportTableToExcel('item-data-table', 'myExcelFile')">Excel</button> -->
+            <div>
+                <label for="order-status">Order Status</label>
+                <select name="order-status" id="order-status">
+                    <option value="open">Open</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="printing">Printing</option>
+                    <option value="cutting">Cutting</option>
+                    <option value="closed">Closed</option>
+                    <option value="reprint">Reprint</option>
+                </select>
+            </div>
+            <button id="saveOrderButton">Save Order</button>
+            <button id="exportTableToExcel">Excel</button>
+
+        </div>
+        
+    </header>
+    <div id="content">
         <h2>No data found</h2>
     </div>
 

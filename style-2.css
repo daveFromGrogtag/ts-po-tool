@@ -158,8 +158,82 @@ body {
     font-weight: bold;
 }
 
+header nav {
+    border: 2px #aaa solid;
+    margin-bottom: .5rem;
+    border-radius: 5px;
+}
+
+header .tool-bar {
+    border: 2px #aaa solid;
+    padding: 1rem;
+    margin-bottom: .5rem;
+    border-radius: 5px;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+
+}
+
+header .tool-bar button {
+    padding: 1rem;
+    min-width: 150px;
+    font-size: 1.25rem;
+    border: 2px #aaa solid;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+header .tool-bar button:hover {
+    background: #ddd
+}
+
+header .tool-bar label {
+    min-width: 150px;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+header .tool-bar select {
+    padding: 1rem;
+    min-width: 150px;
+    font-size: 1.25rem;
+    border: 2px #aaa solid;
+    border-radius: 5px;
+}
+
+header nav ul {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    gap: 1rem;
+    list-style-type: none;
+    justify-content: center;
+    margin-block-start: unset;
+    margin-block-end: unset;
+    margin-inline-start: unset;
+    margin-inline-end: unset;
+    padding-inline-start: unset;
+
+}
+
+header nav ul li {
+    padding: .5rem;
+}
+
+header nav ul a {
+    text-decoration: none;
+}
+
+header nav ul a:hover {
+    text-decoration: underline;
+}
+
 @media print {
-    h1 {
+    header {
         display: none;
     }
     #po-upload {

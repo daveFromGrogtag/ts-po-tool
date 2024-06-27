@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getFirestore, setDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-    //add firebase config here
+//insert firebase config here
 };
 
 // Initialize Firebase
@@ -25,7 +25,7 @@ function getQueryParamValue(paramName) {
 function saveOrder() {
     try {
         let orderId = document.getElementById("orderId").innerText
-        let orderHtml = document.getElementById("orderInfo").innerHTML
+        let orderHtml = document.getElementById("content").innerHTML
         let orderStatus = document.getElementById("order-status").value
         let poDate = document.getElementById("poDate").innerHTML
         setDoc(doc(db, "orders", orderId), {
@@ -33,15 +33,18 @@ function saveOrder() {
             status: orderStatus,
             poDate: poDate,
             orderId: orderId
+        }).then(() => {
+            alert(`Order ${orderId} saved`)
         })
     } catch (error) {
+        alert(`Order not saved`)
         console.error(error);
     }
 }
 
 function displayOrderInfo() {
     let orderId = getQueryParamValue("id")
-    const orderInfo = document.getElementById("orderInfo")
+    const orderInfo = document.getElementById("content")
     const orderStatus = document.getElementById("order-status")
     getDoc(doc(db, "orders", orderId)).then((doc) => {
         orderInfo.innerHTML = doc.data().html
@@ -55,6 +58,21 @@ document.getElementById("saveOrderButton").addEventListener('click', () => {
     saveOrder()
     console.log("Order saved.");
 })
+document.getElementById("exportTableToExcel").addEventListener('click', () => {
+    console.log("exporting order as XLSX...");
+    exportTableToExcel('item-data-table')
+})
+
+
+function exportTableToExcel(tableID) {
+    // Select the table
+    let filename = document.getElementById('orderId').innerText
+    var table = document.getElementById(tableID);
+    var workbook = XLSX.utils.table_to_book(table, { sheet: "Sheet JS" });
+
+    // Generate XLSX file and trigger download
+    XLSX.writeFile(workbook, filename ? filename + '.xlsx' : 'exported_table.xlsx');
+}
 
 function dataImageUpdate() {
     let imageInput
@@ -93,6 +111,5 @@ function dataImageUpdate() {
         imageInput.value = '';
     })
 }
-
 
 displayOrderInfo()

@@ -10,7 +10,24 @@
 </head>
 
 <body>
-    <h1>Order List</h1>
+    <header>
+        <h1>Order List</h1>
+        <nav>
+            <ul>
+                <li>
+                    <a href="./index.html">Home</a>
+                </li>
+                <li>
+                    <a href="./order-list.html">Order List</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="tool-bar">
+            <!-- <button onclick="exportTableToExcel('item-data-table', 'myExcelFile')">Excel</button>
+            <button onclick="downloadPDF()">PDF</button>
+            <button id="saveOrderButton">Save Order</button> -->
+        </div>
+    </header>
     <table id="orderList"></table>
     <script type="module" src="./order-list.js"></script>
 </body>

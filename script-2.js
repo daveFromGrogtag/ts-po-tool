@@ -259,8 +259,11 @@ document.getElementById('image-selector').addEventListener('change', () => {
     imageInput.value = '';
 })
 
-function exportTableToExcel(tableID, filename = '') {
+
+
+function exportTableToExcel(tableID) {
     // Select the table
+    let filename = document.getElementById('orderId').innerText
     var table = document.getElementById(tableID);
     var workbook = XLSX.utils.table_to_book(table, { sheet: "Sheet JS" });
 
@@ -268,16 +271,16 @@ function exportTableToExcel(tableID, filename = '') {
     XLSX.writeFile(workbook, filename ? filename + '.xlsx' : 'exported_table.xlsx');
 }
 
-function downloadPDF() {
-    // Get the HTML content from the specified element
-    const element = document.getElementById('content');
+// function downloadPDF() {
+//     // Get the HTML content from the specified element
+//     const element = document.getElementById('content');
 
-    // Use html2pdf to generate the PDF
-    html2pdf(element, {
-        margin: 1,
-        filename: 'document.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-    });
-}
+//     // Use html2pdf to generate the PDF
+//     html2pdf(element, {
+//         margin: 1,
+//         filename: 'document.pdf',
+//         image: { type: 'jpeg', quality: 0.98 },
+//         html2canvas: { scale: 2 },
+//         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+//     });
+// }
