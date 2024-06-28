@@ -146,6 +146,20 @@ body {
     padding: 10px 25px;
 } */
 
+tr.reprint {
+    background: lightcoral;
+}
+
+tr.shipped {
+    background: lightgreen;
+}
+
+tr.rush {
+    background: red;
+    color: white;
+    font-weight: bold;
+}
+
 #orderList {
     font-size: 1.25rem;
     list-style-type: none;
