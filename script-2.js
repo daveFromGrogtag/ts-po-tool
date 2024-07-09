@@ -66,7 +66,7 @@ function textParse(text) {
     let tableText = text.match(tableRegex);
     let tableHeaderText = text.match(tableHeaderRegex)
     let tableTotalRegex = /Total [\w \.]{1,}/
-    let tableAdditionalInstructionsRegex = /Additional Instructions[\w \:\.\-]{0,}/
+    let tableAdditionalInstructionsRegex = /Additional Notes[\w \:\.\-]{0,}/
     let tableBodyText = tableText[0].replace(tableHeaderRegex, "").replace(tableTotalRegex, "").replace(tableAdditionalInstructionsRegex, "")
     let tableBodyArray = removeEmptyStrings(tableBodyText.split(" "))
     return tableBodyArray
