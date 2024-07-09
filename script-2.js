@@ -100,17 +100,18 @@ function findBetween(text, startPattern, endPattern) {
 }
 
 function getPoData(text) {
+
     const orderNumberRegex = /Order#[ ]{1,}[\w\d]{1,}/
     const poDateRegex = /PO Date[ ]{1,}[\w\d\/]{1,}/
     const vendorRegex = /Vendor#[ ]{1,}[\w\d]{1,}/
     const enteredByRegex = /Entered By[ ]{1,}[\w\d]{1,}/
-    const additionalInstructionsRegex = /Additional Instructions[\w \:\.\-]{0,}/
+    const additionalInstructionsRegex = /Additional Notes[\w \:\.\-]{0,}/
 
     let orderNumber = text.match(orderNumberRegex)[0].replace(/Order#[ ]{1,}/, "")
     let poDate = text.match(poDateRegex)[0].replace(/PO Date[ ]{1,}/, "")
     let vendor = text.match(vendorRegex)[0].replace(/Vendor#[ ]{1,}/, "")
     let enteredBy = text.match(enteredByRegex)[0].replace(/Entered By[ ]{1,}/, "")
-    let additionalInstructions = text.match(additionalInstructionsRegex) ? text.match(additionalInstructionsRegex)[0].replace(/Total [\w \.]{1,}/, "").replace(/Additional Instructions:[ ]{0,}/, "") : ""
+    let additionalInstructions = text.match(additionalInstructionsRegex) ? text.match(additionalInstructionsRegex)[0].replace(/Total [\w \.]{1,}/, "").replace(/Additional Notes:[ ]{0,}/, "") : ""
 
     const startShipToRegex = /Ship To: [ ]{0,}/;
     const endShipToRegex = /[]{0,} Ship Date/;
@@ -119,12 +120,14 @@ function getPoData(text) {
 
     const startInfoRegex = /Phone/
     const endInfoRegex = /Description/
-    let infoArray = findBetween(text, startInfoRegex, endInfoRegex).split("   ")
-    let shipDate = infoArray[0]
-    let expectedOn = infoArray[1]
-    let terms = infoArray[2]
-    let shipVia = infoArray[3]
-    let phone = infoArray[4]
+
+    let infoString = findBetween(text, startInfoRegex, endInfoRegex)
+    let shipDate = infoString.match(/[0-9]{2}\/[0-9]{2}\/[0-9]{2,4}/)
+    let expectedOn = infoString.replace(/[0-9]{2}\/[0-9]{2}\/[0-9]{2,4}/, "").match(/[0-9]{2}\/[0-9]{2}\/[0-9]{2,4}/)
+    let terms = infoString.match(/Net [0-9]{1,} Days/)
+    let shipVia = infoString.replace(/[0-9]{2}\/[0-9]{2}\/[0-9]{2,4}[\s]{1,}[0-9]{2}\/[0-9]{2}\/[0-9]{2,4}[\s]{1,}Net [0-9]{1,} Days/, "").replace(/[0-9]{3}-[0-9]{3}-[0-9]{4}/, "")
+    let phone = infoString.match(/[0-9]{3}-[0-9]{3}-[0-9]{4}/)
+    console.log(shipDate);
 
     let poDataHtml = `<table>
     <tr><th>PoNumber:</th><td id="orderId">${orderNumber}</td></tr>
@@ -241,7 +244,7 @@ document.getElementById('parsed-text').addEventListener('click', function(event)
     }
 });
 
-// Image selector for Chaning Table images
+// Image selector for Changing Table images
 document.getElementById('image-selector').addEventListener('change', () => {
     console.log('Selecting New Image');
     const file = imageInput.files[0];
@@ -253,6 +256,12 @@ document.getElementById('image-selector').addEventListener('change', () => {
             window.currentImageElement.src = e.target.result;
         };
         reader.readAsDataURL(file);
+    } else if (file && file.type.startsWith('application/pdf')) {
+        console.log("You selected a pdf");
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            window.currentImageElement.src = pdfCanvas.toDataURL()
+        }
     } else {
         alert('Please select a valid image file.');
     }
