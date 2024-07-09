@@ -129,6 +129,8 @@ function getPoData(text) {
     let phone = infoString.match(/[0-9]{3}-[0-9]{3}-[0-9]{4}/)
     console.log(shipDate);
 
+    let poHeaderHtml = `<h2>${orderNumber}</h2>`
+
     let poDataHtml = `<table>
     <tr><th>PoNumber:</th><td id="orderId">${orderNumber}</td></tr>
     <tr><th>PO Date:</th><td id="poDate">${poDate}</td></tr>
@@ -151,6 +153,7 @@ function getPoData(text) {
     <tr><td>${additionalInstructions}</td></tr>
 </table>`
 
+    document.getElementById('po-header').innerHTML = poHeaderHtml
     document.getElementById('po-data').innerHTML = poDataHtml
     document.getElementById('shipping-info').innerHTML = shipDataHtml
     document.getElementById('additional-instructions').innerHTML = additionalInstructionsHtml
@@ -258,10 +261,10 @@ document.getElementById('image-selector').addEventListener('change', () => {
         reader.readAsDataURL(file);
     } else if (file && file.type.startsWith('application/pdf')) {
         console.log("You selected a pdf");
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            window.currentImageElement.src = pdfCanvas.toDataURL()
-        }
+        // const reader = new FileReader();
+        // reader.onload = (e) => {
+        //     window.currentImageElement.src = pdfCanvas.toDataURL()
+        // }
     } else {
         alert('Please select a valid image file.');
     }
