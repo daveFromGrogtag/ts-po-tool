@@ -259,17 +259,62 @@ document.getElementById('image-selector').addEventListener('change', () => {
             window.currentImageElement.src = e.target.result;
         };
         reader.readAsDataURL(file);
-    } else if (file && file.type.startsWith('application/pdf')) {
-        console.log("You selected a pdf");
-        // const reader = new FileReader();
-        // reader.onload = (e) => {
-        //     window.currentImageElement.src = pdfCanvas.toDataURL()
-        // }
+    } else if (file.type === 'application/pdf') {
+        // Handle PDF files
+        console.log('PDF file selected');
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+            const pdfData = new Uint8Array(e.target.result);
+            try {
+                const thumbnailDataURL = await pdfToThumbnailDataURL(pdfData);
+                console.log(thumbnailDataURL);
+                // Display the thumbnail somewhere (e.g., set as image source)
+                window.currentImageElement.src = thumbnailDataURL;
+            } catch (error) {
+                console.error('Error generating PDF thumbnail:', error);
+                alert('Error generating PDF thumbnail. Please try again.');
+            }
+        };
+        reader.readAsArrayBuffer(file);
     } else {
         alert('Please select a valid image file.');
     }
     imageInput.value = '';
 })
+
+async function pdfToThumbnailDataURL(pdfData) {
+    // Load PDF using PDF.js
+    const loadingTask = pdfjsLib.getDocument({ data: pdfData });
+    const pdf = await loadingTask.promise;
+
+    // Fetch the first page
+    const pageNumber = 1;
+    const page = await pdf.getPage(pageNumber);
+
+    // Set desired thumbnail size
+    const thumbnailWidth = 100;  // Adjust width as needed
+    const viewport = page.getViewport({ scale: 1 });
+    const scale = thumbnailWidth / viewport.width;
+    const scaledViewport = page.getViewport({ scale });
+
+    // Create canvas element
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    canvas.width = scaledViewport.width;
+    canvas.height = scaledViewport.height;
+
+    // Render PDF page on canvas
+    const renderContext = {
+        canvasContext: context,
+        viewport: scaledViewport
+    };
+    await page.render(renderContext).promise;
+
+    // Convert canvas to PNG data URL
+    const dataURL = canvas.toDataURL('image/png');
+
+    return dataURL;
+}
 
 
 
