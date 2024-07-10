@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, setDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"; 
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBQ3npHe8IjeMRTJZM3C7i7TJRQJGq2tTo",
@@ -82,13 +82,13 @@ function exportTableToExcel(tableID) {
 
 function dataImageUpdate() {
     let imageInput
-        // Change Data on Sheet
-    document.getElementById('parsed-text').addEventListener('click', function(event) {
+    // Change Data on Sheet
+    document.getElementById('parsed-text').addEventListener('click', function (event) {
         // Change table values
         if (event.target.tagName.toLowerCase() === 'td') {
             console.log(event.target.innerText);
             event.target.innerText = prompt("Change Field", event.target.innerText)
-                // changeTextModal(event.target.innerText, event)
+            // changeTextModal(event.target.innerText, event)
         }
         // Change table images
         if (event.target.tagName.toLowerCase() === 'img') {
@@ -99,7 +99,7 @@ function dataImageUpdate() {
         }
     });
 
-    // Image selector for Chaning Table images
+    // Image selector for Changing Table images
     document.getElementById('image-selector').addEventListener('change', () => {
         console.log('Selecting New Image');
         const file = imageInput.files[0];
@@ -111,11 +111,62 @@ function dataImageUpdate() {
                 window.currentImageElement.src = e.target.result;
             };
             reader.readAsDataURL(file);
+        } else if (file.type === 'application/pdf') {
+            // Handle PDF files
+            console.log('PDF file selected');
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const pdfData = new Uint8Array(e.target.result);
+                try {
+                    const thumbnailDataURL = await pdfToThumbnailDataURL(pdfData);
+                    console.log(thumbnailDataURL);
+                    // Display the thumbnail somewhere (e.g., set as image source)
+                    window.currentImageElement.src = thumbnailDataURL;
+                } catch (error) {
+                    console.error('Error generating PDF thumbnail:', error);
+                    alert('Error generating PDF thumbnail. Please try again.');
+                }
+            };
+            reader.readAsArrayBuffer(file);
         } else {
             alert('Please select a valid image file.');
         }
         imageInput.value = '';
     })
+}
+
+async function pdfToThumbnailDataURL(pdfData) {
+    // Load PDF using PDF.js
+    const loadingTask = pdfjsLib.getDocument({ data: pdfData });
+    const pdf = await loadingTask.promise;
+
+    // Fetch the first page
+    const pageNumber = 1;
+    const page = await pdf.getPage(pageNumber);
+
+    // Set desired thumbnail size
+    const thumbnailWidth = 100;  // Adjust width as needed
+    const viewport = page.getViewport({ scale: 1 });
+    const scale = thumbnailWidth / viewport.width;
+    const scaledViewport = page.getViewport({ scale });
+
+    // Create canvas element
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    canvas.width = scaledViewport.width;
+    canvas.height = scaledViewport.height;
+
+    // Render PDF page on canvas
+    const renderContext = {
+        canvasContext: context,
+        viewport: scaledViewport
+    };
+    await page.render(renderContext).promise;
+
+    // Convert canvas to PNG data URL
+    const dataURL = canvas.toDataURL('image/png');
+
+    return dataURL;
 }
 
 displayOrderInfo()
@@ -128,38 +179,38 @@ const signInButton = document.getElementById('googleSignInBtn')
 signInButton.addEventListener('click', () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        // Redirect or handle signed-in user
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        console.error(errorMessage);
-      });
-  });
+        .then((result) => {
+            const user = result.user;
+            console.log(user);
+            // Redirect or handle signed-in user
+        })
+        .catch((error) => {
+            const errorMessage = error.message;
+            console.error(errorMessage);
+        });
+});
 
-  signOutButton.addEventListener('click', () => {
+signOutButton.addEventListener('click', () => {
     signOut(auth)
-    .then(() => {
-      // Sign-out successful.
-      console.log('User signed out');
-      // Redirect or update UI as needed after sign-out
-    })
-    .catch((error) => {
-      // An error happened.
-      console.error('Sign Out Error', error);
-    });
-  })
+        .then(() => {
+            // Sign-out successful.
+            console.log('User signed out');
+            // Redirect or update UI as needed after sign-out
+        })
+        .catch((error) => {
+            // An error happened.
+            console.error('Sign Out Error', error);
+        });
+})
 
-  onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, (user) => {
     if (user) {
-      // User is signed in
-      signInButton.style.display = 'none'; // Hide sign-in button
-      signOutButton.style.display = 'block'; // Show sign-out button
+        // User is signed in
+        signInButton.style.display = 'none'; // Hide sign-in button
+        signOutButton.style.display = 'block'; // Show sign-out button
     } else {
-      // User is signed out
-      signInButton.style.display = 'block'; // Show sign-in button
-      signOutButton.style.display = 'none'; // Hide sign-out button
+        // User is signed out
+        signInButton.style.display = 'block'; // Show sign-in button
+        signOutButton.style.display = 'none'; // Hide sign-out button
     }
-  });
+});
