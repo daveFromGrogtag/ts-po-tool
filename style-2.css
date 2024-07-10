@@ -251,6 +251,10 @@ header nav ul a:hover {
     background: #f4f4f4;
 }
 
+#po-total {
+    font-size: 1.25rem;
+}
+
 @media print {
     header {
         display: none;

@@ -106,12 +106,16 @@ function getPoData(text) {
     const vendorRegex = /Vendor#[ ]{1,}[\w\d]{1,}/
     const enteredByRegex = /Entered By[ ]{1,}[\w\d]{1,}/
     const additionalInstructionsRegex = /Additional Notes[\w \:\.\-]{0,}/
+    const tableTotalRegex =/Total[\s]{1,}[0-9]{1,}[\s]{1,}[0-9.0]{1,}/
 
     let orderNumber = text.match(orderNumberRegex)[0].replace(/Order#[ ]{1,}/, "")
     let poDate = text.match(poDateRegex)[0].replace(/PO Date[ ]{1,}/, "")
     let vendor = text.match(vendorRegex)[0].replace(/Vendor#[ ]{1,}/, "")
     let enteredBy = text.match(enteredByRegex)[0].replace(/Entered By[ ]{1,}/, "")
     let additionalInstructions = text.match(additionalInstructionsRegex) ? text.match(additionalInstructionsRegex)[0].replace(/Total [\w \.]{1,}/, "").replace(/Additional Notes:[ ]{0,}/, "") : ""
+    let tableTotal = text.match(tableTotalRegex)[0].split(/[\s]{1,}/)
+    let tableTotalQty = tableTotal[1]
+    let tableTotalPrice = tableTotal[2] ? `$${tableTotal[2]}` : ''
 
     const startShipToRegex = /Ship To: [ ]{0,}/;
     const endShipToRegex = /[]{0,} Ship Date/;
@@ -127,7 +131,7 @@ function getPoData(text) {
     let terms = infoString.match(/Net [0-9]{1,} Days/)
     let shipVia = infoString.replace(/[0-9]{2}\/[0-9]{2}\/[0-9]{2,4}[\s]{1,}[0-9]{2}\/[0-9]{2}\/[0-9]{2,4}[\s]{1,}Net [0-9]{1,} Days/, "").replace(/[0-9]{3}-[0-9]{3}-[0-9]{4}/, "")
     let phone = infoString.match(/[0-9]{3}-[0-9]{3}-[0-9]{4}/)
-    console.log(shipDate);
+    
 
     let poHeaderHtml = `<h2>${orderNumber}</h2>`
 
@@ -153,10 +157,17 @@ function getPoData(text) {
     <tr><td>${additionalInstructions}</td></tr>
 </table>`
 
+    let poTotalHtml = `<table>
+    <tr><th>Quantity</th><th>Total</th></tr>
+    <tr><td>${tableTotalQty}</td><td>${tableTotalPrice}</td></tr>
+    </table>`
+
     document.getElementById('po-header').innerHTML = poHeaderHtml
     document.getElementById('po-data').innerHTML = poDataHtml
     document.getElementById('shipping-info').innerHTML = shipDataHtml
     document.getElementById('additional-instructions').innerHTML = additionalInstructionsHtml
+    document.getElementById('po-total').innerHTML = poTotalHtml
+
 }
 
 function downloadTextFile(filename, text) {
@@ -315,8 +326,6 @@ async function pdfToThumbnailDataURL(pdfData) {
 
     return dataURL;
 }
-
-
 
 function exportTableToExcel(tableID) {
     // Select the table
