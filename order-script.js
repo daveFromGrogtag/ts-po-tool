@@ -34,11 +34,13 @@ function saveOrder() {
         let orderHtml = document.getElementById("content").innerHTML
         let orderStatus = document.getElementById("order-status").value
         let poDate = document.getElementById("poDate").innerHTML
+        let rushCheck = document.getElementById("rush-check").checked
         setDoc(doc(db, "orders", orderId), {
             html: orderHtml,
             status: orderStatus,
             poDate: poDate,
-            orderId: orderId
+            orderId: orderId,
+            rush: rushCheck
         }).then(() => {
             alert(`Order ${orderId} saved`)
         })
@@ -52,9 +54,11 @@ function displayOrderInfo() {
     let orderId = getQueryParamValue("id")
     const orderInfo = document.getElementById("content")
     const orderStatus = document.getElementById("order-status")
+    const rushCheck = document.getElementById("rush-check")
     getDoc(doc(db, "orders", orderId)).then((doc) => {
         orderInfo.innerHTML = doc.data().html
         orderStatus.value = doc.data().status
+        rushCheck.checked = doc.data().rush
         dataImageUpdate()
     })
 }

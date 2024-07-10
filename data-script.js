@@ -23,11 +23,13 @@ function saveOrder() {
         let orderId = document.getElementById("orderId").innerText
         let poDate = document.getElementById("poDate").innerHTML
         let orderHtml = document.getElementById("content").innerHTML
+        let rushCheck = document.getElementById("rush-check").checked
         setDoc(doc(db, "orders", orderId), {
             html: orderHtml,
             status: "open",
             poDate: poDate,
-            orderId: orderId
+            orderId: orderId,
+            rush: rushCheck
         }).then(() => {
             alert("Order saved")
             console.log(`Order ${orderId} saved`);
