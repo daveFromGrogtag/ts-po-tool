@@ -145,17 +145,12 @@ body {
     padding: 10px 25px;
 } */
 
-tr.reprint {
-    background: lightcoral;
-}
-
 tr.shipped {
     background: lightgreen;
 }
 
 tr.rush {
-    background: red;
-    color: white;
+    background: lightcoral;
     font-weight: bold;
 }
 
@@ -253,6 +248,10 @@ header nav ul a:hover {
 
 #po-total {
     font-size: 1.25rem;
+}
+
+.rush-settings {
+padding: 1rem;
 }
 
 @media print {
