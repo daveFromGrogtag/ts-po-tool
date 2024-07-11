@@ -258,6 +258,49 @@ header nav ul a:hover {
 padding: 1rem;
 }
 
+#packing-list #po-data {
+display: none;
+}
+
+#packing-list #additional-instructions {
+    display: none;
+}
+
+#packing-list .order-data {
+    display: block;
+}
+
+#packing-list #shipping-info {
+    width: 100%;
+}
+
+#packing-list #item-data-table tr td:nth-child(5),
+#packing-list #item-data-table tr th:nth-child(5),
+#packing-list #item-data-table tr td:nth-child(6),
+#packing-list #item-data-table tr th:nth-child(6) {
+    display: none;
+}
+
+#packing-list #client-order-id {
+    width: 100%;
+    font-size: 2.5rem;
+    text-align: center;
+    box-sizing: border-box;
+    padding: .5rem;
+    font-weight: bold;
+    border: none;
+    background-color: #eee;
+}
+
+#packing-list #po-total {
+    display: none;
+}
+
+#packing-list #po-header {
+    display: none;
+}
+
+
 @media print {
     header {
         display: none;

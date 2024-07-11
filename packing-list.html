@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TS Order Info</title>
+    <link rel="stylesheet" href="./style-2.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <button id="googleSignInBtn">Sign In</button><button id="signOutBtn">Sign Out</button>
+        <nav>
+            <ul>
+                <li>
+                    <a href="./index.html">Home</a>
+                </li>
+                <li>
+                    <a href="./order-list.html">Order List</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="tool-bar" style="display: none;">
+            <div>
+                <label for="order-status">Order Status</label>
+                <select name="order-status" id="order-status">
+                    <option value="open">Open</option>
+                    <option value="pending">Pending</option>
+                    <option value="approved">Approved</option>
+                    <option value="processing">Processing</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="invoiced">Invoiced</option>
+                    <option value="closed">Closed</option>
+                </select>
+            </div>
+            <button id="saveOrderButton">Save Order</button>
+            <button id="exportTableToExcel">Excel</button>
+            <div class="rush-settings">
+                <label for="rush-check">Is it a rush?</label>
+                <input type="checkbox" name="rush-cehck" id="rush-check">
+            </div>
+        </div>
+        
+    </header>
+    <div id="packing-list">
+        <h1>Packing List</h1>
+        <input type="text" name="client-order-id" id="client-order-id" placeholder="click to add client order id">
+        <div id="content">
+            <h2>No data found</h2>
+        </div>
+    </div>
+
+    <input type="file" name="image-selector" id="image-selector" />
+    <script type="module" src="./order-script.js"></script>
+</body>
+
+</html>
