@@ -145,13 +145,17 @@ body {
     padding: 10px 25px;
 } */
 
+tr.rush {
+    background: lightcoral;
+    font-weight: bold;
+}
+
 tr.shipped {
     background: lightgreen;
 }
 
-tr.rush {
-    background: lightcoral;
-    font-weight: bold;
+tr.invoiced {
+    background: lightsteelblue;
 }
 
 #orderList {
