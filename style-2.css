@@ -300,6 +300,11 @@ display: none;
     display: none;
 }
 
+#vertical-id {
+    display: none;
+    rotate: 90deg;
+    font-size: 4rem;
+}
 
 @media print {
     header {
@@ -313,5 +318,15 @@ display: none;
     }
     .instructions {
         display: none;
+    }
+    th, td {
+        padding: 0px;
+    }
+
+    #vertical-id {
+        display: block;
+    }
+    #po-header {
+background: none;
     }
 }

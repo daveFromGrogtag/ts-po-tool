@@ -116,6 +116,9 @@ function getPoData(text) {
     let tableTotal = text.match(tableTotalRegex)[0].split(/[\s]{1,}/)
     let tableTotalQty = tableTotal[1]
     let tableTotalPrice = tableTotal[2] ? `$${tableTotal[2]}` : ''
+    let customerOrderId = text.match(/[A-z0-9]{4,}-[A-z0-9]{3,}-[A-z0-9]{3,}/)[0].match(/[A-z0-9]{3,}/)
+
+    console.log(customerOrderId);
 
     const startShipToRegex = /Ship To: [ ]{0,}/;
     const endShipToRegex = /[]{0,} Ship Date/;
@@ -137,6 +140,7 @@ function getPoData(text) {
 
     let poDataHtml = `<table>
     <tr><th>PoNumber:</th><td id="orderId">${orderNumber}</td></tr>
+    <tr><th>Customer Order Id:</th><td id="orderId">${customerOrderId}</td></tr>
     <tr><th>PO Date:</th><td id="poDate">${poDate}</td></tr>
     <tr><th>Vendor:</th><td>${vendor}</td></tr>
     <tr><th>Entered By:</th><td>${enteredBy}</td></tr>
@@ -145,6 +149,8 @@ function getPoData(text) {
     <tr><th>Terms:</th><td>${terms}</td></tr>
     <tr><th>Ship Via:</th><td>${shipVia}</td></tr>
     <tr><th>Phone:</th><td>${phone?phone:""}</td></tr>
+    <tr><th>QTY:</th><td>${tableTotalQty}</td></tr>
+    <tr><th>PRICE:</th><td>${tableTotalPrice}</td></tr>
     </table>`
 
     let shipDataHtml = `<table>
@@ -162,11 +168,14 @@ function getPoData(text) {
     <tr><td>${tableTotalQty}</td><td>${tableTotalPrice}</td></tr>
     </table>`
 
+    let verticalIdHtml = `<h1>${orderNumber}</h1>`
+
     document.getElementById('po-header').innerHTML = poHeaderHtml
     document.getElementById('po-data').innerHTML = poDataHtml
     document.getElementById('shipping-info').innerHTML = shipDataHtml
     document.getElementById('additional-instructions').innerHTML = additionalInstructionsHtml
     document.getElementById('po-total').innerHTML = poTotalHtml
+    document.getElementById('vertical-id').innerHTML = verticalIdHtml
 
 }
 
