@@ -106,7 +106,7 @@ function getPoData(text) {
     const vendorRegex = /Vendor#[ ]{1,}[\w\d]{1,}/
     const enteredByRegex = /Entered By[ ]{1,}[\w\d]{1,}/
     const additionalInstructionsRegex = /Additional Notes[\w \:\.\-]{0,}/
-    const tableTotalRegex =/Total[\s]{1,}[0-9\,]{1,}[\s]{1,}[0-9.0]{1,}/
+    const tableTotalRegex =/Total[\s]{1,}[0-9\,]{1,}[\s]{1,}[0-9\.\,]{1,}/
 
     let orderNumber = text.match(orderNumberRegex)[0].replace(/Order#[ ]{1,}/, "")
     let poDate = text.match(poDateRegex)[0].replace(/PO Date[ ]{1,}/, "")
@@ -118,7 +118,7 @@ function getPoData(text) {
     let tableTotalPrice = tableTotal[2] ? `$${tableTotal[2]}` : ''
     let customerOrderId = text.match(/[A-z0-9]{4,}-[A-z0-9]{3,}-[A-z0-9]{3,}/)[0].match(/[A-z0-9]{3,}/)
 
-    console.log(customerOrderId);
+    console.log( text.match(tableTotalRegex)[0] );
 
     const startShipToRegex = /Ship To: [ ]{0,}/;
     const endShipToRegex = /[]{0,} Ship Date/;
