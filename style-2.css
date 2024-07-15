@@ -300,6 +300,10 @@ display: none;
     display: none;
 }
 
+#packing-list #vertical-id {
+    display: none;
+}
+
 #vertical-id {
     display: none;
     rotate: 90deg;
