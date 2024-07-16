@@ -24,6 +24,10 @@ td {
     text-align: left;
 }
 
+#item-data-table tr td:last-child {
+    max-width: 150px;
+}
+
 /* #parsed-text td {
     padding: 0;
 }
