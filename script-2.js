@@ -312,7 +312,7 @@ async function pdfToThumbnailDataURL(pdfData) {
     const page = await pdf.getPage(pageNumber);
 
     // Set desired thumbnail size
-    const thumbnailWidth = 100;  // Adjust width as needed
+    const thumbnailWidth = 80;  // Adjust width as needed
     const viewport = page.getViewport({ scale: 1 });
     const scale = thumbnailWidth / viewport.width;
     const scaledViewport = page.getViewport({ scale });
@@ -345,6 +345,34 @@ function exportTableToExcel(tableID) {
     // Generate XLSX file and trigger download
     XLSX.writeFile(workbook, filename ? filename + '.xlsx' : 'exported_table.xlsx');
 }
+
+function exportTableToJson(tableID) {
+    var table = document.getElementById(tableID);
+    // Initialize empty array to store table rows
+    var data = [];
+
+    // Iterate through each row in the table (skip the header row)
+    for (var i = 1; i < table.rows.length; i++) {
+        var tableRow = table.rows[i];
+        var rowData = {};
+
+        // Iterate through each cell in the row
+        for (var j = 0; j < tableRow.cells.length; j++) {
+            var tableCell = tableRow.cells[j];
+
+            // Use the header's text content as the key and the cell's content as the value
+            rowData[table.rows[0].cells[j].textContent.trim()] = tableCell.textContent.trim();
+        }
+
+        // Add the row data object to the array
+        data.push(rowData);
+    }
+
+    // Return the JSON representation of the data array
+    console.log(JSON.stringify(data));
+    return JSON.stringify(data);
+}
+
 
 // function downloadPDF() {
 //     // Get the HTML content from the specified element

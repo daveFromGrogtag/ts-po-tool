@@ -28,6 +28,7 @@ td {
     max-width: 150px;
 }
 
+
 /* #parsed-text td {
     padding: 0;
 }
@@ -312,6 +313,7 @@ display: none;
     display: none;
     rotate: 90deg;
     font-size: 4rem;
+    height: fit-content;
 }
 
 @media print {

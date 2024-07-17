@@ -30,6 +30,7 @@
         <div class="tool-bar">
             <button id="saveOrderButton">Save Order</button>
             <button onclick="exportTableToExcel('item-data-table')">Excel</button>
+            <button onclick="exportTableToJson('item-data-table')">Json</button>
             <div class="rush-settings">
                 <label for="rush-check">Is it a rush?</label>
                 <input type="checkbox" name="rush-cehck" id="rush-check">
@@ -47,8 +48,8 @@
             <div>
                 <div id="shipping-info"></div>
                 <div id="additional-instructions"></div>
-                <div id="vertical-id"></div>
             </div>
+            <div id="vertical-id"></div>
         </section>
         <section class="item-data">
             <div id="parsed-text">
