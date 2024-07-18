@@ -149,6 +149,16 @@ body {
     font-size: 1.25rem;
     padding: 10px 25px;
 } */
+/* 
+open = white
+pending = white
+approved = SOMETHING
+in-production = SOMETHING
+shipped = SOMETHING
+invoiced = SOMETHING
+complete = GONE */
+
+
 
 tr.rush {
     background: lightcoral;
@@ -161,6 +171,11 @@ tr.shipped {
 
 tr.invoiced {
     background: lightsteelblue;
+}
+
+tr.approved {
+    background: teal;
+    color: white;
 }
 
 #orderList {

@@ -65,6 +65,7 @@ signInButton.addEventListener('click', () => {
       });
   });
 
+
   signOutButton.addEventListener('click', () => {
     signOut(auth)
     .then(() => {

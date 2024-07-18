@@ -35,12 +35,14 @@ function saveOrder() {
         let orderStatus = document.getElementById("order-status").value
         let poDate = document.getElementById("poDate").innerHTML
         let rushCheck = document.getElementById("rush-check").checked
+        let trackingNumber = document.getElementById('tracking-number').innerText
         setDoc(doc(db, "orders", orderId), {
             html: orderHtml,
             status: orderStatus,
             poDate: poDate,
             orderId: orderId,
-            rush: rushCheck
+            rush: rushCheck,
+            tracking: trackingNumber
         }).then(() => {
             alert(`Order ${orderId} saved`)
         })
@@ -71,6 +73,11 @@ document.getElementById("saveOrderButton").addEventListener('click', () => {
 document.getElementById("exportTableToExcel").addEventListener('click', () => {
     console.log("exporting order as XLSX...");
     exportTableToExcel('item-data-table')
+})
+document.getElementById("addTracking").addEventListener('click', () => {
+    console.log("adding Tracking Info...");
+    addTrackingData()
+
 })
 
 
@@ -137,6 +144,17 @@ function dataImageUpdate() {
         }
         imageInput.value = '';
     })
+}
+
+function addTrackingData() {
+    const trackingNumber = document.getElementById('tracking-number')
+    let newTrackingNumber = prompt("Add Tracking Number", trackingNumber.innerText)
+    trackingNumber.innerText = newTrackingNumber
+
+//     let trackingDataHtml = `<table>
+//     <tr><th>Tracking Info:</th></tr>
+//     <tr><td>${trackingInfo}</td></tr>
+// </table>`
 }
 
 async function pdfToThumbnailDataURL(pdfData) {

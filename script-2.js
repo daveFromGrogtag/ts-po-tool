@@ -134,7 +134,6 @@ function getPoData(text) {
     let terms = infoString.match(/Net [0-9]{1,} Days/)
     let shipVia = infoString.replace(/[0-9]{2}\/[0-9]{2}\/[0-9]{2,4}[\s]{1,}[0-9]{2}\/[0-9]{2}\/[0-9]{2,4}[\s]{1,}Net [0-9]{1,} Days/, "").replace(/[0-9]{3}-[0-9]{3}-[0-9]{4}/, "")
     let phone = infoString.match(/[0-9]{3}-[0-9]{3}-[0-9]{4}/)
-    
 
     let poHeaderHtml = `<h2>${orderNumber}</h2>`
 
@@ -158,6 +157,11 @@ function getPoData(text) {
     <tr><td>${shipToFormatted}</td></tr>
 </table>`
 
+    let trackingDataHtml = `<table>
+    <tr><th>Tracking Info:</th></tr>
+    <tr><td id="tracking-number"></td></tr>
+</table>`
+
     let additionalInstructionsHtml = `<table>
     <tr><th>Additional Instructions:</th></tr>
     <tr><td>${additionalInstructions}</td></tr>
@@ -173,6 +177,7 @@ function getPoData(text) {
     document.getElementById('po-header').innerHTML = poHeaderHtml
     document.getElementById('po-data').innerHTML = poDataHtml
     document.getElementById('shipping-info').innerHTML = shipDataHtml
+    document.getElementById('tracking-info').innerHTML = trackingDataHtml
     document.getElementById('additional-instructions').innerHTML = additionalInstructionsHtml
     document.getElementById('po-total').innerHTML = poTotalHtml
     document.getElementById('vertical-id').innerHTML = verticalIdHtml
