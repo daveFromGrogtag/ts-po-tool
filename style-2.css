@@ -286,12 +286,25 @@ display: none;
     display: none;
 }
 
+#packing-list #tracking-info {
+    display: none;
+}
+
 #packing-list .order-data {
     display: block;
 }
 
 #packing-list #shipping-info {
     width: 100%;
+}
+
+#packing-list .packing-list-header {
+    text-align: center;
+}
+
+#packing-list .packing-list-header img {
+    height: 100px;
+    width: auto;
 }
 
 #packing-list #item-data-table tr td:nth-child(5),
