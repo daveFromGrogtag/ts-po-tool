@@ -148,7 +148,7 @@ function getPoData(text) {
     <tr><th>Expected:</th><td>${expectedOn}</td></tr>
     <tr><th>Terms:</th><td>${terms}</td></tr>
     <tr><th>Ship Via:</th><td>${shipVia}</td></tr>
-    <tr><th>Phone:</th><td>${phone?phone:""}</td></tr>
+    ${phone?`<tr><th>Phone:</th><td>${phone}</td></tr>`:""}
     <tr><th>QTY:</th><td>${tableTotalQty}</td></tr>
     <tr><th>PRICE:</th><td>${tableTotalPrice}</td></tr>
     </table>`
