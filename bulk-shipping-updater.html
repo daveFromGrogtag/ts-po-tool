@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shipping Updater</title>
     <link rel="stylesheet" href="./style-2.css">
+    <script type="module" src="./firebase/auth-handler.js"></script>
 
 </head>
+
 <body>
     <h1>Shipping Updater</h1>
     <button id="googleSignInBtn">Sign In</button><button id="signOutBtn">Sign Out</button>
     <hr>
     Upload a .csv file with an OrderId field and a tracking-number field.
-<hr>
+    <hr>
     <input type="file" id="csvFileInput" accept=".csv"><br><br>
     <button id="csvBulkUpload">Upload CSV</button>
-<script type="module" src="./bulk-shipping-script.js"></script>
+    <script type="module" src="./bulk-shipping-script.js"></script>
 </body>
+
 </html>
