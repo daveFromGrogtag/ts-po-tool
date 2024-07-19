@@ -1,6 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap');
+
+:root {
+    --text-color: black;
+    --bg-main: white;
+    --bg-header: #f4f4f4;
+    --td-odd: white;
+    --td-even: #ddd;
+    --td-hover: #f4f4f4;
+
+}
+
 html {
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
     font-size: .75rem;
+    font-family: "Noto Sans Mono", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+button, input {
+    font-family: "Noto Sans Mono", monospace;
 }
 
 table {
@@ -79,6 +98,7 @@ tr:hover {
 }
 
 #po-upload::file-selector-button {
+    font-family: "Noto Sans Mono", monospace;
     padding: 1rem;
     background: lightcoral;
     border-radius: 5px;
@@ -161,21 +181,20 @@ complete = GONE */
 
 
 tr.rush {
-    background: lightcoral;
+    background: #f2bdbd;
     font-weight: bold;
 }
 
 tr.shipped {
-    background: lightgreen;
+    background: #c1f2bd;
 }
 
 tr.invoiced {
-    background: lightsteelblue;
+    background: #eac7ff;
 }
 
 tr.approved {
-    background: teal;
-    color: white;
+    background: #faefb4;
 }
 
 #orderList {
@@ -343,6 +362,65 @@ display: none;
     font-size: 4rem;
     height: fit-content;
 }
+
+.status-changer-container {
+    margin: auto;
+}
+
+.status-changer-container button {
+  display: block;
+  background: lightskyblue;
+  border: none;
+  font-size: 2rem;
+  padding: 1rem;
+  margin: .75rem auto;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 300px;
+  font-weight: bold;
+}
+
+.current-status-label {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+#order-status-display {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 auto 2rem auto;
+    padding: 1rem 3rem;
+    background-color: #eee;
+    font-weight: bold;
+    border-radius: 10px;
+    width:fit-content;
+}
+
+#sign-in-credentials {
+    max-width: 500px;
+    margin: auto;
+    font-size: 1.5rem;
+}
+
+#order-list-link button, #sign-in-credentials button {
+    font-size: 1.5rem;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+}
+
+#sign-in-credentials input {
+    font-size: 1.5rem;
+}
+
+#sign-in-credentials label {
+    display: block;
+}
+
+#order-list-link a {
+    font-size: 1.5rem;
+}
+
 
 @media print {
     header {

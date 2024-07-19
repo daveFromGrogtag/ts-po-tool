@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="./style-2.css">
+
+</head>
+<body class="">
+    <h1>Welcome to the TechStyles PO Tracking Tool</h1>
+    <div id="sign-in-credentials">
+        <div>Please sign in below</div>
+        <hr>
+        <form id="login-form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            
+            <button type="submit">Sign In</button>
+        </form>
+    
+        <p id="message"></p>
+    </div>
+    <div id="order-list-link">
+        <button id="signOutBtn">Sign Out</button>
+        <br>
+        <hr>
+        <br>
+        <h2>Hi! Select Order List below to see your current orders.</h2>
+        <a href="./order-list.html">Order List</a>
+    </div>
+<script type="module" src="./sign-in-script.js"></script>
+</body>
+</html>
