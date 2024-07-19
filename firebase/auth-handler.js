@@ -4,6 +4,7 @@ import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from
 
 
 const signOutButton = document.getElementById('signOutBtn')
+const emailSignInButton = document.getElementById('emailSignIn')
 const signInButton = document.getElementById('googleSignInBtn')
 
 signInButton.addEventListener('click', () => {
@@ -34,14 +35,18 @@ signOutButton.addEventListener('click', () => {
     });
 })
 
+
+
 onAuthStateChanged(auth, (user) => {
     if (user) {
     // User is signed in
     signInButton.style.display = 'none'; // Hide sign-in button
+    emailSignInButton.style.display = 'none';
     signOutButton.style.display = 'block'; // Show sign-out button
     } else {
     // User is signed out
     signInButton.style.display = 'block'; // Show sign-in button
+    emailSignInButton.style.display = 'block';
     signOutButton.style.display = 'none'; // Hide sign-out button
     }
 });

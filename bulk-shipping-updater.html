@@ -7,12 +7,24 @@
     <title>Shipping Updater</title>
     <link rel="stylesheet" href="./style-2.css">
     <script type="module" src="./firebase/auth-handler.js"></script>
-
 </head>
 
 <body>
-    <h1>Shipping Updater</h1>
-    <button id="googleSignInBtn">Sign In</button><button id="signOutBtn">Sign Out</button>
+    <header>
+        <h1>Shipping Updater</h1>
+        <button id="googleSignInBtn">Google Sign In</button><a id="emailSignIn" href="./sign-in.html"><button>Email Sign In</button></a><button id="signOutBtn">Sign Out</button>
+        <nav>
+            <ul>
+                <li>
+                    <a href="./index.html">Home</a>
+                </li>
+                <li>
+                    <a href="./order-list.html">Order List</a>
+                </li>
+            </ul>
+        </nav>
+
+    </header>
     <hr>
     Upload a .csv file with an OrderId field and a tracking-number field.
     <hr>
