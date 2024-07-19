@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, setDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, setDoc, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
@@ -35,14 +35,14 @@ function saveOrder() {
         let orderStatus = document.getElementById("order-status").value
         let poDate = document.getElementById("poDate").innerHTML
         let rushCheck = document.getElementById("rush-check").checked
-        let trackingNumber = document.getElementById('tracking-number').innerText
-        setDoc(doc(db, "orders", orderId), {
+        let trackingInfo = document.getElementById("tracking-number").innerHTML
+        updateDoc(doc(db, "orders", orderId), {
             html: orderHtml,
             status: orderStatus,
             poDate: poDate,
             orderId: orderId,
             rush: rushCheck,
-            tracking: trackingNumber
+            tracking: trackingInfo
         }).then(() => {
             alert(`Order ${orderId} saved`)
         })
@@ -63,6 +63,11 @@ function displayOrderInfo() {
         rushCheck.checked = doc.data().rush
         dataImageUpdate()
     })
+    .then(
+        getDoc(doc(db, "orders", orderId)).then((doc) => {
+            document.getElementById("tracking-number").innerHTML = doc.data().tracking
+        })
+    )
 }
 
 document.getElementById("saveOrderButton").addEventListener('click', () => {
