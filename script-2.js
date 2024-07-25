@@ -73,6 +73,7 @@ function textParse(text) {
 }
 
 function pageSplit(text) {
+
     getPoData(text);
     let combinedArray = []
     let perPage = removeEmptyStrings(text.split('\n\n'))
@@ -100,6 +101,11 @@ function findBetween(text, startPattern, endPattern) {
 }
 
 function getPoData(text) {
+//     text = `PURCHASE ORDER  Page#   1  Order#   31131  PO Date   07/24/2024  Vendor#   PANGAEA  Entered By   michelle1  Vendor: PANGAEA  Pangaea Print, LLC  6636 Benham Way  Sacramento, CA  95831  Ship To:  OUTWEST TRADING CO.  ( BOZEMAN)  5 EAST MAIN ST  Bozeman, MT  59715  Ship Date   Expected On   Terms   Ship Via   Phone  07/30/2024   07/30/2024   Net 30 Days   FedEx Grnd-3rd Party  Description   OS   Total   Price   Extended  S3X5  T07760-25067-8369  50   50   0.54   27.00  610925970991   $3.99  S3X5  T07760-24024-8369  50   50   0.54   27.00  610925971080   $3.99  S3X5  T07760-22037-8369  50   50   0.54   27.00  610925973459   $3.99  S3X5  T07760-25353-8369  50   50   0.54   27.00  610925973831  $3.99  S3X5  T07760-09644-8369  50   50   0.54   27.00  610925984387   $3.99  S3X5  T07760-25827-8369  50   50   0.54   27.00  610925974982  $3.99  S3X5  T07760-25740-8369  50   50   0.54   27.00  610925975033  $3.99  S3X5  T07760-25790-8369  50   50   0.54   27.00  610925984363 $3.99  S3X5  T07760-24643-8369  50   50   0.54   27.00  610925975392   $3.99  S3X5  T07760-25739-8369  50   50   0.54   27.00  610925975040  $3.99  S3X5  T07760-16516-8369  50   50   0.54   27.00  610925973565  $3.99  S3X5  T07760-25820-8369  50   50   0.54   27.00  610925974999  $3.99  S3X5  T07760-19855-8369  50   50   0.54   27.00  610925973558   $3.99
+
+// PURCHASE ORDER  Page#   2  Order#   31131  Description   OS   Total   Price   Extended  S3X5  T07760-24064-8369  50   50   0.54   27.00  610925971066   $3.99  S3X5  T07760-25783-8369  50   50   0.54   27.00  610925984370 $3.99  S3X5  T07760-24832-8369  50   50   0.54   27.00  610925973572  $3.99  TICKET ALL UNITS  FED-EX   202624155  Total   800   1432.00`
+
+    console.log(text);
 
     const orderNumberRegex = /Order#[ ]{1,}[\w\d]{1,}/
     const poDateRegex = /PO Date[ ]{1,}[\w\d\/]{1,}/
@@ -118,7 +124,7 @@ function getPoData(text) {
     let tableTotalPrice = tableTotal[2] ? `$${tableTotal[2]}` : ''
     let customerOrderId = text.match(/[A-z0-9]{4,}-[A-z0-9]{3,}-[A-z0-9]{3,}/)[0].match(/[A-z0-9]{3,}/)
 
-    console.log( text.match(tableTotalRegex)[0] );
+    // console.log( text.match(tableTotalRegex)[0] );
 
     const startShipToRegex = /Ship To: [ ]{0,}/;
     const endShipToRegex = /[]{0,} Ship Date/;
