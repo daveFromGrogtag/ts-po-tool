@@ -1,5 +1,6 @@
 import { db } from "./firebase/init.js"
 import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+// import { uploadFile } from "./firebase/upload-file.js";
 
 function getQueryParamValue(paramName) {
     let url = window.location.href;

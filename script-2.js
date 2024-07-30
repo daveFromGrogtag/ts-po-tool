@@ -45,23 +45,59 @@ function joinAsHtmlTable(arr, itemsPerLine) {
     if (itemsPerLine === 8) {
         result = '<tr><th>Size</th><th>SKU</th><th>OS</th><th>Total</th><th>Price</th><th>Extended</th><th>UPC-Number</th><th>UPC-Price</th><th>Image</th><th>Notes</th></tr><tr>'
     }
-    for (let i = 0; i < arr.length; i++) {
-        result += `<td>${arr[i]}</td>`;
-
-
-        if ((i + 1) % itemsPerLine === 0 && i !== arr.length - 1) {
-            result += '<td><div class="table-image"><img src="./No-Image-01.png"></div></td><td></td></tr><tr>';
-        } else if ((i + 1) % itemsPerLine === 0 && i === arr.length - 1) {
-            result += '<td><div class="table-image"><img src="./No-Image-01.png"></div></td><td></td></tr>';
-        } else if (i !== arr.length - 1) {
-            result += '';
+    if (itemsPerLine === 8 || itemsPerLine === 6) {
+        for (let i = 0; i < arr.length; i++) {
+            result += `<td>${arr[i]}</td>`;
+    
+    
+            if ((i + 1) % itemsPerLine === 0 && i !== arr.length - 1) {
+                result += '<td><div class="table-image"><img src="./No-Image-01.png"></div></td><td></td></tr><tr>';
+            } else if ((i + 1) % itemsPerLine === 0 && i === arr.length - 1) {
+                result += '<td><div class="table-image"><img src="./No-Image-01.png"></div></td><td></td></tr>';
+            } else if (i !== arr.length - 1) {
+                result += '';
+            }
         }
+        return `<table id="item-data-table">${result}</table>`
     }
-    return `<table id="item-data-table">${result}</table>`
+    let unformattedTable = splitArrayByRegex(arr, /(?=[A-Z]\dX\d)/g)
+    let formattedTable = ''
+    unformattedTable.map(unRow => {
+        newRow = ''
+        unRow.map(unCell => {
+            newRow += `<td>${unCell}</td>`
+        })
+        formattedTable += `<tr>${newRow}<td><div class="table-image"><img src="./No-Image-01.png"></div></td><td></td></tr>`
+    })
+    console.log(formattedTable);
+    // return `<textarea>${unformattedTable.join("\r")}</textarea>`
+    return `<table><tbody><tr><th>Size</th><th>SKU</th><th>OS</th><th>Total</th><th>Price</th><th>Extended</th><th>Image</th><th>Notes</th></tr><tr>${formattedTable}</tbody></table>`
+
+
+    // let tableArea = arr.join("---")
+    // console.log(tableArea.split(/(?=[A-Z]\dX\d)/g));
+    // let tableAreaArray = tableArea.split(/(?=[A-Z]\dX\d)/g)
+    // let tableAreaHtml = tableAreaArray.join('<br>')
+    // return tableAreaHtml
 }
 
+function splitArrayByRegex(arr, regex) {
+    // Join the array into a string with a unique separator (e.g., '\0')
+    const separator = '\0'; // Ensure this separator is not in the original array
+    const joinedString = arr.join(separator);
+
+    // Split the string by the regular expression and filter out empty entries
+    const splitStrings = joinedString.split(regex).filter(Boolean);
+
+    // Convert the split strings back into arrays
+    const result = splitStrings.map(str => str.split(separator));
+
+    return result;
+}
+
+
 function textParse(text) {
-    let tableRegex = /Description [\w $\.\-]{1,}/;
+    let tableRegex = /Description [\w $\.\-\:\"]{1,}/;
     let tableHeaderRegex = /Description [\w $]{1,} Extended/
     let tableText = text.match(tableRegex);
     let tableHeaderText = text.match(tableHeaderRegex)
