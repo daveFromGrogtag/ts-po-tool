@@ -1,6 +1,6 @@
 import { db } from "./firebase/init.js"
 import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-// import { uploadFile } from "./firebase/upload-file.js";
+import { uploadFile } from "./firebase/upload-file.js";
 
 function getQueryParamValue(paramName) {
     let url = window.location.href;
@@ -149,37 +149,38 @@ function addTrackingData() {
 }
 
 async function pdfToThumbnailDataURL(pdfData) {
-    // Load PDF using PDF.js
-    const loadingTask = pdfjsLib.getDocument({ data: pdfData });
-    const pdf = await loadingTask.promise;
+    return uploadFile(pdfData)
+    // // Load PDF using PDF.js
+    // const loadingTask = pdfjsLib.getDocument({ data: pdfData });
+    // const pdf = await loadingTask.promise;
 
-    // Fetch the first page
-    const pageNumber = 1;
-    const page = await pdf.getPage(pageNumber);
+    // // Fetch the first page
+    // const pageNumber = 1;
+    // const page = await pdf.getPage(pageNumber);
 
-    // Set desired thumbnail size
-    const thumbnailWidth = 100;  // Adjust width as needed
-    const viewport = page.getViewport({ scale: 1 });
-    const scale = thumbnailWidth / viewport.width;
-    const scaledViewport = page.getViewport({ scale });
+    // // Set desired thumbnail size
+    // const thumbnailWidth = 100;  // Adjust width as needed
+    // const viewport = page.getViewport({ scale: 1 });
+    // const scale = thumbnailWidth / viewport.width;
+    // const scaledViewport = page.getViewport({ scale });
 
-    // Create canvas element
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    canvas.width = scaledViewport.width;
-    canvas.height = scaledViewport.height;
+    // // Create canvas element
+    // const canvas = document.createElement('canvas');
+    // const context = canvas.getContext('2d');
+    // canvas.width = scaledViewport.width;
+    // canvas.height = scaledViewport.height;
 
-    // Render PDF page on canvas
-    const renderContext = {
-        canvasContext: context,
-        viewport: scaledViewport
-    };
-    await page.render(renderContext).promise;
+    // // Render PDF page on canvas
+    // const renderContext = {
+    //     canvasContext: context,
+    //     viewport: scaledViewport
+    // };
+    // await page.render(renderContext).promise;
 
-    // Convert canvas to PNG data URL
-    const dataURL = canvas.toDataURL('image/png');
+    // // Convert canvas to PNG data URL
+    // const dataURL = canvas.toDataURL('image/png');
 
-    return dataURL;
+    // return dataURL;
 }
 
 displayOrderInfo()

@@ -349,6 +349,7 @@ document.getElementById('image-selector').addEventListener('change', () => {
 })
 
 async function pdfToThumbnailDataURL(pdfData) {
+    // uploadFile(pdfData)
     // Load PDF using PDF.js
     const loadingTask = pdfjsLib.getDocument({ data: pdfData });
     const pdf = await loadingTask.promise;
