@@ -22,13 +22,15 @@ function saveOrder() {
         let poDate = document.getElementById("poDate").innerHTML
         let rushCheck = document.getElementById("rush-check").checked
         let trackingInfo = document.getElementById("tracking-number").innerHTML
+        let totalPrice = document.getElementById("total-price").innerText
         updateDoc(doc(db, "orders", orderId), {
             html: orderHtml,
             status: orderStatus,
             poDate: poDate,
             orderId: orderId,
             rush: rushCheck,
-            tracking: trackingInfo
+            tracking: trackingInfo,
+            totalPrice: totalPrice
         }).then(() => {
             alert(`Order ${orderId} saved`)
         })

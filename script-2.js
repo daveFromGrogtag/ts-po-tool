@@ -420,6 +420,9 @@ function exportTableToJson(tableID) {
     return JSON.stringify(data);
 }
 
+function checkUpcPricing() {
+    
+}
 
 // function downloadPDF() {
 //     // Get the HTML content from the specified element

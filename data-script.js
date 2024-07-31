@@ -8,12 +8,16 @@ function saveOrder() {
         let poDate = document.getElementById("poDate").innerHTML
         let orderHtml = document.getElementById("content").innerHTML
         let rushCheck = document.getElementById("rush-check").checked
+        let trackingInfo = document.getElementById("tracking-number").innerHTML
+        let totalPrice = document.getElementById("total-price").innerText
         setDoc(doc(db, "orders", orderId), {
             html: orderHtml,
             status: "open",
             poDate: poDate,
             orderId: orderId,
-            rush: rushCheck
+            rush: rushCheck,
+            tracking: trackingInfo,
+            totalPrice: totalPrice
         }).then(() => {
             alert("Order saved")
             console.log(`Order ${orderId} saved`);
