@@ -71,7 +71,7 @@ function joinAsHtmlTable(arr, itemsPerLine) {
     })
     console.log(formattedTable);
     // return `<textarea>${unformattedTable.join("\r")}</textarea>`
-    return `<table><tbody><tr><th>Size</th><th>SKU</th><th>OS</th><th>Total</th><th>Price</th><th>Extended</th><th>Image</th><th>Notes</th></tr><tr>${formattedTable}</tbody></table>`
+    return `<table id="item-data-table"><tbody><tr><th>Size</th><th>SKU</th><th>OS</th><th>Total</th><th>Price</th><th>Extended</th><th>Image</th><th>Notes</th></tr><tr>${formattedTable}</tbody></table>`
 
 
     // let tableArea = arr.join("---")
