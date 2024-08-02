@@ -11,11 +11,13 @@ import { updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/fireb
     reader.onload = function(event) {
         console.log("Reading file...");
       const csv = event.target.result;
+      console.log(csv);
+      
       const rows = csv.split('\n');
       const headers = rows[0].split(',');
-      const orderIdIndex = headers.indexOf('OrderId');
-      const trackingNumberIndex = headers.indexOf('tracking-number\r');
-  
+      const orderIdIndex = headers.indexOf('Order Id');
+      const trackingNumberIndex = headers.indexOf('Tracking\r');
+      let updateStatus = ""
       for (let i = 1; i < rows.length; i++) {
         const columns = rows[i].split(',');
         const orderId = columns[orderIdIndex];
@@ -23,10 +25,13 @@ import { updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/fireb
         // Update Firestore with tracking number
         if (orderId && trackingNumber) {
           updateFirestore(orderId.trim(), trackingNumber.trim());
+          updateStatus += `<div>order ${orderId} updated</div>`
         } else {
             console.log("Something went wrong...");
+            updateStatus += `<div>order ${orderId} failed</div>`
         }
       }
+      document.getElementById('bulk-update-status').innerHTML = updateStatus
     };
   
     reader.readAsText(file);
