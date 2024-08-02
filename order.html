@@ -10,12 +10,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+    </script>
 </head>
 
 <body>
     <header>
         <h1>Order Info</h1>
-        <button id="googleSignInBtn">Google Sign In</button><a id="emailSignIn" href="./sign-in.html"><button>Email Sign In</button></a><button id="signOutBtn">Sign Out</button>
+        <button id="googleSignInBtn">Google Sign In</button><a id="emailSignIn" href="./sign-in.html"><button>Email Sign
+                In</button></a><button id="signOutBtn">Sign Out</button>
         <nav>
             <ul>
                 <li>
@@ -46,14 +49,16 @@
             </div>
             <button id="saveOrderButton">Save Order</button>
             <button id="exportTableToExcel">Excel</button>
+            <!-- <button id="addQrCodeButton">Add QR Code</button> -->
             <button id="addTracking">Add Tracking</button>
             <div class="rush-settings">
                 <label for="rush-check">Is it a rush?</label>
                 <input type="checkbox" name="rush-cehck" id="rush-check">
             </div>
         </div>
-        
+
     </header>
+    <div id='qrcode'></div>
     <div id="content">
         <h2>No data found</h2>
     </div>

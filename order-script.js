@@ -67,6 +67,10 @@ document.getElementById("exportTableToExcel").addEventListener('click', () => {
     console.log("exporting order as XLSX...");
     exportTableToExcel('item-data-table')
 })
+// document.getElementById("addQrCodeButton").addEventListener('click', () => {
+//     console.log("Adding QR Code...");
+//     createQrCode()
+// })
 document.getElementById("addTracking").addEventListener('click', () => {
     console.log("adding Tracking Info...");
     addTrackingData()
@@ -185,4 +189,18 @@ async function pdfToThumbnailDataURL(pdfData) {
     // return dataURL;
 }
 
+function createQrCode() {
+    let orderId = getQueryParamValue("id")
+    let qrcodearea = document.getElementById('qrcode')
+    new QRCode("qrcode", {
+        text: `https://davefromgrogtag.github.io/ts-po-tool/order-status-changer.html?id=${orderId}`,
+        width: 80,
+        height: 80,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+}
+
 displayOrderInfo()
+createQrCode()
