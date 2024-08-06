@@ -97,7 +97,7 @@ function splitArrayByRegex(arr, regex) {
 
 
 function textParse(text) {
-    let tableRegex = /Description [\w $\.\-\:\"]{1,}/;
+    let tableRegex = /Description [\w $\.\-\:\"\#]{1,}/;
     let tableHeaderRegex = /Description [\w $]{1,} Extended/
     let tableText = text.match(tableRegex);
     let tableHeaderText = text.match(tableHeaderRegex)
