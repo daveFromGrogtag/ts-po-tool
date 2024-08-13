@@ -19,7 +19,7 @@ function saveOrder(status) {
         setDoc(doc(db, "orders", orderId), {
             status: orderStatus,
             // tracking: trackingNumber
-        }).then(() => {
+        },{merge: true}).then(() => {
             displayOrderInfo()
         })
     } catch (error) {
