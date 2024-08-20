@@ -23,6 +23,9 @@ function saveOrder() {
         let rushCheck = document.getElementById("rush-check").checked
         let trackingInfo = document.getElementById("tracking-number").innerHTML
         let totalPrice = document.getElementById("total-price").innerText
+        let dueDate = document.getElementById("dueDateInput") ? document.getElementById("dueDateInput").value : "-"
+        let approvalDate = document.getElementById("approvalDateInput") ? document.getElementById("approvalDateInput").value : "-"
+
         updateDoc(doc(db, "orders", orderId), {
             html: orderHtml,
             status: orderStatus,
@@ -30,13 +33,80 @@ function saveOrder() {
             orderId: orderId,
             rush: rushCheck,
             tracking: trackingInfo,
-            totalPrice: totalPrice
+            totalPrice: totalPrice,
+            dueDate: dueDate,
+            approvalDate: approvalDate
         }).then(() => {
             alert(`Order ${orderId} saved`)
         })
     } catch (error) {
         alert(`Order not saved`)
         console.error(error);
+    }
+}
+
+function dueDateChanger() {
+    try {
+        document.getElementById("dueDate").addEventListener('change', (e) => {
+            console.log(e.target.value)
+            e.target.setAttribute('value', e.target.value)
+        })
+    } catch (error) {
+        
+    }
+}
+
+function approvalDateChanger() {
+    try {
+        document.getElementById("approvalDate").addEventListener('change', (e) => {
+            console.log(e.target.value)
+            e.target.setAttribute('value', e.target.value)
+        })
+    } catch (error) {
+        
+    }
+}
+
+
+function dateCalculation() {
+    let turnDays;
+    const today = new Date();
+    let turnTimeDay = new Date(today);
+
+    if (parseInt(document.getElementById('total-quantity').innerText.replace(/,/g, '')) >= 1000) {
+        turnDays = 7
+    } else {
+        turnDays = 4
+    }
+
+
+    // Function to add weekdays
+    function addWeekdays(startDate, numWeekdays) {
+        let currentDate = new Date(startDate);
+        let daysAdded = 0;
+
+        while (daysAdded < numWeekdays) {
+            currentDate.setDate(currentDate.getDate() + 1);
+            // Check if the current day is a weekday (Monday to Friday)
+            if (currentDate.getDay() !== 0 && currentDate.getDay() !== 6) {
+                daysAdded++;
+            }
+        }
+
+        return currentDate;
+    }
+
+
+    turnTimeDay = addWeekdays(today, turnDays);
+
+    if (document.getElementById("approvalDateInput").value === '') {
+        document.getElementById('approvalDateInput').valueAsDate = today;
+        document.getElementById('approvalDateInput').setAttribute('value', document.getElementById('approvalDateInput').value)
+    }
+
+    if (document.getElementById("dueDateInput").value === '') {
+        document.getElementById('dueDateInput').valueAsDate = turnTimeDay;
+        document.getElementById('dueDateInput').setAttribute('value', document.getElementById('dueDateInput').value)
     }
 }
 
@@ -50,12 +120,15 @@ function displayOrderInfo() {
         orderStatus.value = doc.data().status
         rushCheck.checked = doc.data().rush
         dataImageUpdate()
+        dueDateChanger()
+        approvalDateChanger()
     })
     .then(
         getDoc(doc(db, "orders", orderId)).then((doc) => {
             document.getElementById("tracking-number").innerHTML = doc.data().tracking
         })
     )
+
 }
 
 document.getElementById("saveOrderButton").addEventListener('click', () => {
@@ -75,6 +148,12 @@ document.getElementById("addTracking").addEventListener('click', () => {
     console.log("adding Tracking Info...");
     addTrackingData()
 
+})
+document.getElementById("order-status").addEventListener('change', (e) => {
+    if (e.target.value == 'approved') {
+        dateCalculation()
+    }
+    
 })
 
 

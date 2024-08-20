@@ -102,7 +102,7 @@ function textParse(text) {
     let tableText = text.match(tableRegex);
     let tableHeaderText = text.match(tableHeaderRegex)
     let tableTotalRegex = /Total [\w \.]{1,}/
-    let tableAdditionalInstructionsRegex = /Additional Notes[\w \:\.\-]{0,}/
+    let tableAdditionalInstructionsRegex = /Additional Notes[\w \:\.\-\#\/]{0,}/
     let tableBodyText = tableText[0].replace(tableHeaderRegex, "").replace(tableTotalRegex, "").replace(tableAdditionalInstructionsRegex, "")
     let tableBodyArray = removeEmptyStrings(tableBodyText.split(" "))
     return tableBodyArray
@@ -147,7 +147,7 @@ function getPoData(text) {
     const poDateRegex = /PO Date[ ]{1,}[\w\d\/]{1,}/
     const vendorRegex = /Vendor#[ ]{1,}[\w\d]{1,}/
     const enteredByRegex = /Entered By[ ]{1,}[\w\d]{1,}/
-    const additionalInstructionsRegex = /Additional Notes[\w \:\.\-]{0,}/
+    const additionalInstructionsRegex = /Additional Notes[\w \:\.\-\#\/]{0,}/
     const tableTotalRegex =/Total[\s]{1,}[0-9\,]{1,}[\s]{1,}[0-9\.\,]{1,}/
 
     let orderNumber = text.match(orderNumberRegex)[0].replace(/Order#[ ]{1,}/, "")
@@ -189,6 +189,8 @@ function getPoData(text) {
     <tr><th>Expected:</th><td>${expectedOn}</td></tr>
     <tr><th>Terms:</th><td>${terms}</td></tr>
     <tr><th>Ship Via:</th><td>${shipVia}</td></tr>
+     <tr><th>Approval Date:</th><td id="approvalDate"><input id="approvalDateInput" type="date"/></td></tr>
+    <tr><th>Due Date:</th><td id="dueDate"><input id="dueDateInput" type="date"/></td></tr>
     <tr><th>QTY:</th><td id="total-quantity">${tableTotalQty}</td></tr>
     <tr><th>PRICE:</th><td id="total-price">${tableTotalPrice}</td></tr>
     </table>`

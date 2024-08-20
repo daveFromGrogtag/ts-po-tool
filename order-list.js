@@ -7,10 +7,10 @@ function displayOrderList() {
 
     getDocs(allOrders)
         .then((docs) => {
-            let orderListElements = '<tr><th>Order Id</th><th>Order Status</th><th>Po Date</th><th>Packing Slip</th></tr>'
+            let orderListElements = '<tr><th>Order Id</th><th>Order Status</th><th>Po Date</th><th>App Date</th><th>Due Date</th><th>Packing Slip</th></tr>'
             docs.forEach(order => {
               let rushStatus = order.data().rush ? " rush" : ""
-                let orderLink = `<tr class="${order.data().status}${rushStatus}"><td><a href="./order.html?id=${order.id}">${order.id}</a></td><td>${order.data().status}${rushStatus}</td><td>${order.data().poDate}</td><td><a href="./packing-list.html?id=${order.id}">Slip</a></td></tr>`
+                let orderLink = `<tr class="${order.data().status}${rushStatus}"><td><a href="./order.html?id=${order.id}">${order.id}</a></td><td>${order.data().status}${rushStatus}</td><td>${order.data().poDate}</td><td>${order.data().approvalDate ? order.data().approvalDate : "-"}</td><td>${order.data().dueDate ? order.data().dueDate : "-"}</td><td><a href="./packing-list.html?id=${order.id}">Slip</a></td></tr>`
                 orderListElements += orderLink
             })
             orderList.innerHTML = orderListElements

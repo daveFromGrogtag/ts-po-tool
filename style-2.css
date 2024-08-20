@@ -191,6 +191,7 @@ tr.shipped {
 
 tr.invoiced {
     background: #eac7ff;
+    display: none;
 }
 
 tr.approved {
