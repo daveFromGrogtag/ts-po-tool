@@ -327,6 +327,10 @@ display: none;
     width: auto;
 }
 
+.packing-list-header h1 {
+    background-color: lightcoral;
+}
+
 #packing-list #item-data-table tr td:nth-child(5),
 #packing-list #item-data-table tr th:nth-child(5),
 #packing-list #item-data-table tr td:nth-child(6),

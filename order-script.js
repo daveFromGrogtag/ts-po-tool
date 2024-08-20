@@ -73,7 +73,7 @@ function dateCalculation() {
     const today = new Date();
     let turnTimeDay = new Date(today);
 
-    if (parseInt(document.getElementById('total-quantity').innerText.replace(/,/g, '')) >= 1000) {
+    if (parseInt(document.getElementById('total-quantity').innerText.replace(/,/g, '')) >= 2000) {
         turnDays = 7
     } else {
         turnDays = 4
