@@ -186,6 +186,24 @@ function dataImageUpdate() {
         }
     });
 
+    document.getElementById('po-data').addEventListener('click', function (event) {
+        // Change table values
+        if (event.target.tagName.toLowerCase() === 'td') {
+            console.log(event.target.innerText);
+            event.target.innerText = prompt("Change Field", event.target.innerText)
+            // changeTextModal(event.target.innerText, event)
+        }
+    });
+
+    document.getElementById('po-total').addEventListener('click', function (event) {
+        // Change table values
+        if (event.target.tagName.toLowerCase() === 'td') {
+            console.log(event.target.innerText);
+            event.target.innerText = prompt("Change Field", event.target.innerText)
+            // changeTextModal(event.target.innerText, event)
+        }
+    });
+
     // Image selector for Changing Table images
     document.getElementById('image-selector').addEventListener('change', () => {
         console.log('Selecting New Image');
