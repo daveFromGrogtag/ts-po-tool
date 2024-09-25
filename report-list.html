@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order List</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="./style-2.css">
+    <script type="module" src="./firebase/auth-handler.js"></script>
+    <script src="./utils/table-to-excel.js" defer></script>
+
+</head>
+
+<body>
+    <header>
+        <h1>Shipped List (For Invoicing)</h1>
+        <button id="googleSignInBtn">Google Sign In</button><a id="emailSignIn" href="./sign-in.html"><button>Email Sign In</button></a><button id="signOutBtn">Sign Out</button>
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="./index.html">Home</a>
+                </li>
+                <li>
+                    <a href="./order-list.html">Order-List</a>
+                </li>
+                <li>
+                    <a href="./bulk-shipping-updater.html">Updater</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="tool-bar">
+            <button onclick="exportTableToExcel('shipList', 'InvoiceList')">Excel</button>
+            <!-- <button onclick="downloadPDF()">PDF</button>
+            <button id="saveOrderButton">Save Order</button> -->
+        </div>
+    </header>
+    <table id="shipList"></table>
+    <script type="module" src="./report-list.js"></script>
+</body>
+
+</html>
