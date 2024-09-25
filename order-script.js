@@ -23,6 +23,7 @@ function saveOrder() {
         let rushCheck = document.getElementById("rush-check").checked
         let trackingInfo = document.getElementById("tracking-number").innerHTML
         let totalPrice = document.getElementById("total-price").innerText
+        let totalQuantity = document.getElementById("total-quantity").innerText
         let dueDate = document.getElementById("dueDateInput") ? document.getElementById("dueDateInput").value : "-"
         let approvalDate = document.getElementById("approvalDateInput") ? document.getElementById("approvalDateInput").value : "-"
 
@@ -34,6 +35,7 @@ function saveOrder() {
             rush: rushCheck,
             tracking: trackingInfo,
             totalPrice: totalPrice,
+            totalQuantity: totalQuantity,
             dueDate: dueDate,
             approvalDate: approvalDate
         }).then(() => {

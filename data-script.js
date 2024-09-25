@@ -10,6 +10,8 @@ function saveOrder() {
         let rushCheck = document.getElementById("rush-check").checked
         let trackingInfo = document.getElementById("tracking-number").innerHTML
         let totalPrice = document.getElementById("total-price").innerText
+        let totalQuantity = document.getElementById("total-quantity").innerText
+
         setDoc(doc(db, "orders", orderId), {
             html: orderHtml,
             status: "open",
@@ -17,7 +19,8 @@ function saveOrder() {
             orderId: orderId,
             rush: rushCheck,
             tracking: trackingInfo,
-            totalPrice: totalPrice
+            totalPrice: totalPrice,
+            totalQuantity: totalQuantity
         }).then(() => {
             alert("Order saved")
             console.log(`Order ${orderId} saved`);

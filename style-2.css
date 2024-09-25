@@ -357,9 +357,9 @@ display: none;
     display: none;
 }
 
-#packing-list #po-header {
+/* #packing-list #po-header {
     display: none;
-}
+} */
 
 #packing-list #vertical-id {
     display: none;
