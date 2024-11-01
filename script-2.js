@@ -18,6 +18,7 @@ function countColumns(arr) {
     let rowCount = countRows(arr);
     let cellCount = arr.length;
     let columnCount = cellCount / rowCount
+    console.log(`Col Count: ${columnCount}`);
     return columnCount
 }
 
@@ -101,7 +102,7 @@ function textParse(text) {
     let tableHeaderRegex = /Description [\w $]{1,} Extended/
     let tableText = text.match(tableRegex);
     let tableHeaderText = text.match(tableHeaderRegex)
-    let tableTotalRegex = /Total [\w \.]{1,}/
+    let tableTotalRegex = /Total [\w \.\,]{1,}/
     let tableAdditionalInstructionsRegex = /Additional Notes[\w \:\.\-\#\/]{0,}/
     let tableBodyText = tableText[0].replace(tableHeaderRegex, "").replace(tableTotalRegex, "").replace(tableAdditionalInstructionsRegex, "")
     let tableBodyArray = removeEmptyStrings(tableBodyText.split(" "))
