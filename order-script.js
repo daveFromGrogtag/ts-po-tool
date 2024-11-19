@@ -21,6 +21,8 @@ function saveOrder() {
         let orderStatus = document.getElementById("order-status").value
         let poDate = document.getElementById("poDate").innerHTML
         let rushCheck = document.getElementById("rush-check").checked
+        let upcCheck = document.getElementById("upc-check").checked
+        let productType = document.getElementById("product-type").value
         let trackingInfo = document.getElementById("tracking-number").innerHTML
         let totalPrice = document.getElementById("total-price").innerText
         let totalQuantity = document.getElementById("total-quantity").innerText
@@ -33,6 +35,8 @@ function saveOrder() {
             poDate: poDate,
             orderId: orderId,
             rush: rushCheck,
+            upc: upcCheck,
+            productType: productType,
             tracking: trackingInfo,
             totalPrice: totalPrice,
             totalQuantity: totalQuantity,
@@ -117,10 +121,14 @@ function displayOrderInfo() {
     const orderInfo = document.getElementById("content")
     const orderStatus = document.getElementById("order-status")
     const rushCheck = document.getElementById("rush-check")
+    const upcCheck = document.getElementById("upc-check")
+    const productType = document.getElementById("product-type")
     getDoc(doc(db, "orders", orderId)).then((doc) => {
         orderInfo.innerHTML = doc.data().html
         orderStatus.value = doc.data().status
         rushCheck.checked = doc.data().rush
+        upcCheck.checked = doc.data().upc
+        productType.value = doc.data().productType
         dataImageUpdate()
         dueDateChanger()
         approvalDateChanger()

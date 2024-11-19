@@ -34,8 +34,25 @@
             <button onclick="exportTableToExcel('item-data-table')">Excel</button>
             <button onclick="exportTableToJson('item-data-table')">Json</button>
             <div class="rush-settings">
-                <label for="rush-check">Is it a rush?</label>
-                <input type="checkbox" name="rush-cehck" id="rush-check">
+                <label for="rush-check">Rush?</label>
+                <input type="checkbox" name="rush-check" id="rush-check">
+            </div>
+        </div>
+        <div class="tool-bar">
+            <div class="rush-settings">
+                <label for="upc-check">UPC?</label>
+                <input type="checkbox" name="upc-check" id="upc-check">
+            </div>
+            <div>
+                <label for="product-type">Product Type</label>
+                <select name="product-type" id="product-type">
+                    <option value="stickers">Stickers</option>
+                    <option value="coasters">Coasters</option>
+                    <option value="mdfs">MDF Magnets</option>
+                    <option value="magnets">Magnets</option>
+                    <option value="signs">Signs</option>
+                    <option value="fancy">Fancy Stickers (Holo etc)</option>
+                </select>
             </div>
         </div>
     </header>
