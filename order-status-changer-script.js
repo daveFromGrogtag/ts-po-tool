@@ -42,5 +42,15 @@ document.getElementById('inProductionButton').addEventListener('click', () => sa
 document.getElementById('shippedButton').addEventListener('click',  () => saveOrder('shipped'))
 document.getElementById('invoicedButton').addEventListener('click',  () => saveOrder('invoiced'))
 document.getElementById('closedButton').addEventListener('click',  () => saveOrder('closed'))
+// printing
+document.getElementById('printingButton').addEventListener('click',  () => saveOrder('printing'))
+// laminating
+document.getElementById('laminatingButton').addEventListener('click',  () => saveOrder('laminating'))
+// cutting
+document.getElementById('cuttingButton').addEventListener('click',  () => saveOrder('cutting'))
+// routing
+document.getElementById('routingButton').addEventListener('click',  () => saveOrder('routing'))
+// finishing
+document.getElementById('finishingButton').addEventListener('click',  () => saveOrder('finishing'))
 
 displayOrderInfo()
