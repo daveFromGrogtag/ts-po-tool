@@ -98,12 +98,12 @@ function splitArrayByRegex(arr, regex) {
 
 
 function textParse(text) {
-    let tableRegex = /Description [\w $\.\-\:\"\#\,\/]{1,}/;
+    let tableRegex = /Description [\w $\.\-\:\"\#\,\/\(\)]{1,}/;
     let tableHeaderRegex = /Description [\w $]{1,} Extended/
     let tableText = text.match(tableRegex);
     let tableHeaderText = text.match(tableHeaderRegex)
     let tableTotalRegex = /Total [\w \.\,]{1,}/
-    let tableAdditionalInstructionsRegex = /Additional Notes[\w \:\.\-\#\/]{0,}/
+    let tableAdditionalInstructionsRegex = /Additional Notes[\w \:\.\-\#\/\(\)]{0,}/
     let tableBodyText = tableText[0].replace(tableHeaderRegex, "").replace(tableTotalRegex, "").replace(tableAdditionalInstructionsRegex, "")
     let tableBodyArray = removeEmptyStrings(tableBodyText.split(" "))
     return tableBodyArray

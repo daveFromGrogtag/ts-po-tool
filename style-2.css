@@ -454,4 +454,7 @@ display: none;
     #po-header {
 background: none;
     }
+    #orderList .shipped {
+        display: none;
+    }
 }
