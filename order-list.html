@@ -38,7 +38,35 @@
         </div>
     </header>
     <table id="orderList"></table>
+    <button id="sortTableNow">Sort Table Now</button>
     <script type="module" src="./order-list.js"></script>
+    <script>
+        function sortTableBySeventhColumn(tableId) {
+            let table = document.getElementById(tableId);
+            console.log(table);
+            
+            let tbody = table.querySelector("tbody");
+            let rows = Array.from(tbody.rows);
+            
+            rows.sort((rowA, rowB) => {
+                let cellA = rowA.cells[6]?.textContent.trim() || "";
+                let cellB = rowB.cells[6]?.textContent.trim() || "";
+                
+                let numA = parseFloat(cellA);
+                let numB = parseFloat(cellB);
+                
+                if (!isNaN(numA) && !isNaN(numB)) {
+                    return numA - numB;
+                }
+                return cellA.localeCompare(cellB);
+            });
+            
+            rows.forEach(row => tbody.appendChild(row));
+        }
+        document.getElementById("sortTableNow").addEventListener("click", () => {
+            sortTableBySeventhColumn("orderList")
+        })
+    </script>
 </body>
 
 </html>
