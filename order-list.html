@@ -53,8 +53,11 @@
             rows.sort((rowA, rowB) => {
                 let cellA = rowA.cells[6]?.textContent.trim() || "";
                 let cellB = rowB.cells[6]?.textContent.trim() || "";
-                
-                return cellA.localeCompare(cellB);
+
+                // Move special characters (like '-') to the end for sorting
+                const normalize = (str) => str.replace(/^([-]+)/, 'ZZZZ');
+
+                return normalize(cellA).localeCompare(normalize(cellB));
             });
             
             rows.forEach(row => tbody.appendChild(row));
