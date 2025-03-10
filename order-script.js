@@ -261,6 +261,53 @@ function addTrackingData() {
 // </table>`
 }
 
+function sumSixthColumn(tableId) {
+    let table = document.getElementById(tableId);
+    if (!table) {
+        console.error("Table not found");
+        return 0;
+    }
+    
+    let sum = 0;
+    for (let i = 1; i < table.rows.length; i++) { // Start from 1 to skip the header
+        let cell = table.rows[i].cells[5]; // 6th column (zero-indexed)
+        if (cell) {
+            let value = parseFloat(cell.textContent.trim()) || 0;
+            sum += value;
+        }
+    }
+    return sum;
+}
+function calculateRows(tableId) {
+    // Select the table
+    let table = document.getElementById(tableId);
+    
+    // Loop through each row (skip the header row if applicable)
+    for (let i = 1; i < table.rows.length; i++) {
+        let row = table.rows[i];
+        
+        // Get values from 4th and 5th columns
+        let col4 = parseFloat(row.cells[3].innerText) || 0;
+        let col5 = parseFloat(row.cells[4].innerText) || 0;
+        
+        // Calculate product
+        let product = col4 * col5;
+        
+        // Update 6th column
+        row.cells[5].innerText = product;
+    }
+}
+
+document.getElementById("calcRows").addEventListener("click", () => {
+    calculateRows('item-data-table')
+})
+
+document.getElementById("addItUp").addEventListener("click", ()=> {
+    document.getElementById("total-price").innerHTML = `$${sumSixthColumn("item-data-table")}`
+    document.querySelector("#po-total tr:last-child td:last-child").innerHTML = `$${sumSixthColumn("item-data-table")}`
+    alert(`Total changed to ${sumSixthColumn("item-data-table")}`)
+})
+
 async function pdfToThumbnailDataURL(pdfData) {
     return uploadFile(pdfData)
     // // Load PDF using PDF.js
