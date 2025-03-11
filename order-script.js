@@ -284,29 +284,44 @@ function calculateRows(tableId) {
     
     // Loop through each row (skip the header row if applicable)
     for (let i = 1; i < table.rows.length; i++) {
-        let row = table.rows[i];
+        try {
+            let row = table.rows[i];
         
-        // Get values from 4th and 5th columns
-        let col4 = parseFloat(row.cells[3].innerText) || 0;
-        let col5 = parseFloat(row.cells[4].innerText) || 0;
-        
-        // Calculate product
-        let product = col4 * col5;
-        
-        // Update 6th column
-        row.cells[5].innerText = product;
+            // Get values from 4th and 5th columns
+            let col4 = parseFloat(row.cells[3].innerText) || 0;
+            let col5 = parseFloat(row.cells[4].innerText) || 0;
+            
+            // Calculate product
+            let product = col4 * col5;
+            
+            // Update 6th column
+            row.cells[5].innerText = product;
+        } catch (error) {
+            console.error(error);            
+        }
     }
 }
 
-document.getElementById("calcRows").addEventListener("click", () => {
-    calculateRows('item-data-table')
-})
+try {
+    document.getElementById("calcRows").addEventListener("click", () => {
+        calculateRows('item-data-table')
+    })
+} catch (error) {
+    console.error(error);
+    
+}
 
-document.getElementById("addItUp").addEventListener("click", ()=> {
-    document.getElementById("total-price").innerHTML = `$${sumSixthColumn("item-data-table")}`
-    document.querySelector("#po-total tr:last-child td:last-child").innerHTML = `$${sumSixthColumn("item-data-table")}`
-    alert(`Total changed to ${sumSixthColumn("item-data-table")}`)
-})
+
+try {
+    document.getElementById("addItUp").addEventListener("click", ()=> {
+        document.getElementById("total-price").innerHTML = `$${sumSixthColumn("item-data-table")}`
+        document.querySelector("#po-total tr:last-child td:last-child").innerHTML = `$${sumSixthColumn("item-data-table")}`
+        alert(`Total changed to ${sumSixthColumn("item-data-table")}`)
+    })
+} catch (error) {
+    console.error(error);
+    
+}
 
 async function pdfToThumbnailDataURL(pdfData) {
     return uploadFile(pdfData)
