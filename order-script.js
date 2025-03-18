@@ -276,7 +276,7 @@ function sumSixthColumn(tableId) {
             sum += value;
         }
     }
-    return sum;
+    return sum.toFixed(2);
 }
 function calculateRows(tableId) {
     // Select the table
@@ -295,7 +295,7 @@ function calculateRows(tableId) {
             let product = col4 * col5;
             
             // Update 6th column
-            row.cells[5].innerText = product;
+            row.cells[5].innerText = product.toFixed(2);
         } catch (error) {
             console.error(error);            
         }
