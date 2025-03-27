@@ -28,6 +28,7 @@ function saveOrder() {
         let totalQuantity = document.getElementById("total-quantity").innerText
         let dueDate = document.getElementById("dueDateInput") ? document.getElementById("dueDateInput").value : "-"
         let approvalDate = document.getElementById("approvalDateInput") ? document.getElementById("approvalDateInput").value : "-"
+        let orderNotes = document.getElementById("orderNotes") ? document.getElementById("orderNotes").value : ""
 
         updateDoc(doc(db, "orders", orderId), {
             html: orderHtml,
@@ -41,7 +42,8 @@ function saveOrder() {
             totalPrice: totalPrice,
             totalQuantity: totalQuantity,
             dueDate: dueDate,
-            approvalDate: approvalDate
+            approvalDate: approvalDate,
+            orderNotes: orderNotes
         }).then(() => {
             alert(`Order ${orderId} saved`)
         })
@@ -123,12 +125,14 @@ function displayOrderInfo() {
     const rushCheck = document.getElementById("rush-check")
     const upcCheck = document.getElementById("upc-check")
     const productType = document.getElementById("product-type")
+    const orderNotes = document.getElementById("orderNotes")
     getDoc(doc(db, "orders", orderId)).then((doc) => {
         orderInfo.innerHTML = doc.data().html
         orderStatus.value = doc.data().status
         rushCheck.checked = doc.data().rush
         upcCheck.checked = doc.data().upc
         productType.value = doc.data().productType
+        orderNotes.value = doc.data().orderNotes?doc.data().orderNotes:""
         dataImageUpdate()
         dueDateChanger()
         approvalDateChanger()
