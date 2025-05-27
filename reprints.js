@@ -2,11 +2,15 @@ import { db } from "./firebase/init.js"
 import { query, collection, getDocs, where, orderBy, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 function convertTimestampToDate(timestamp) {
-  const date = new Date(timestamp);
-  const month = date.getMonth()
-  const day = date.getDate()
-  const year = date.getYear()
+    // Timestamp is in seconds for some reason so it needs to be converted to ms via multiplication
+  const date = new Date(timestamp * 1000);
+return formatDate(date)
+}
 
+function formatDate(date) {
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const year = date.getFullYear();
   return `${month}/${day}/${year}`;
 }
 
@@ -34,7 +38,7 @@ function displayReprintList() {
                 <td>${reprint.data().status}</td>
                 <td>${reprint.data().qty}</td>
                 <td>${reprint.data().notes}</td>
-                <td>${convertTimestampToDate(reprint.data().reprintRequested * 1000)}</td>
+                <td>${convertTimestampToDate(reprint.data().reprintRequested["seconds"])}</td>
                 <td><button class="reprint-printed" data-reprint-id=${reprint.id}>Printed</button><button class="reprint-closed" data-reprint-id=${reprint.id}>Close</button></td>
                 </tr>`
                 reprintListElements += reprintLink
