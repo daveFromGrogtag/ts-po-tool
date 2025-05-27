@@ -427,6 +427,8 @@ function checkUpcPricing() {
     
 }
 
+
+
 // function downloadPDF() {
 //     // Get the HTML content from the specified element
 //     const element = document.getElementById('content');

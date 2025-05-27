@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reprints</title>
+    <link rel="stylesheet" href="./style-2.css">
+    <script type="module" src="./firebase/auth-handler.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <h1>Reprints</h1>
+        <button id="googleSignInBtn">Google Sign In</button><a id="emailSignIn" href="./sign-in.html"><button>Email Sign In</button></a><button id="signOutBtn">Sign Out</button>
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="./index.html">Home</a>
+                </li>
+                <li>
+                    <a href="./order-list.html">Order-List</a>
+                </li>
+                <li>
+                    <a href="./bulk-shipping-updater.html">Updater</a>
+                </li>
+                <li>
+                    <a href="./ship-list.html">Invoice/Ship</a>
+                </li>
+                <li>
+                    <a href="./reprints.html">reprints</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="tool-bar">
+            <!-- <button onclick="exportTableToExcel('item-data-table', 'myExcelFile')">Excel</button>
+            <button onclick="downloadPDF()">PDF</button>
+            <button id="saveOrderButton">Save Order</button> -->
+            <div>
+                <label for="">Order Id</label>
+                <input type="text" id="reprintOrderId">
+            </div>
+            <div>
+                <label for="">Item Id</label>
+                <input type="text" id="reprintItemId">
+            </div>
+            <div>
+                <label for="">Item Notes</label>
+                <input type="text" id="reprintNotes">
+            </div>
+            <div>
+                <label for="">Qty to print</label>
+                <input type="number" id="reprintQty">
+            </div>
+            <button id="newReprint">Add Reprint</button>
+        </div>
+    </header>
+    <table id="reprintList"></table>
+    <script type="module" src="./reprints.js"></script>
+</body>
+
+</html>
