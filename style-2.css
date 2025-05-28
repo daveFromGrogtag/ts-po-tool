@@ -458,3 +458,10 @@ background: none;
         display: none;
     }
 }
+
+.reprint-alert {
+    background-color: #f2bdbd;
+    font-size: 14pt;
+    font-weight: 800;
+    padding: 12px;
+}

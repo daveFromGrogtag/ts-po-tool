@@ -18,4 +18,21 @@ function displayOrderList() {
         })
 }
 
+function displayReprints() {
+    const allReprints = query(collection(db, "reprints"), where("status", "==", "open"))
+    let reprintQty = 0
+    getDocs(allReprints)
+        .then((docs) => {
+            docs.forEach(reprint => {
+                reprintQty = reprintQty + parseInt(reprint.data().qty)
+            })
+            if (reprintQty > 0) {
+                document.getElementById('reprintTool').innerHTML = `
+                <div class="reprint-alert">Reprints - Qty: ${reprintQty} - <a href="./reprints.html">Reprints</a></div>
+                `
+            }
+        })
+}
+
 displayOrderList()
+displayReprints()
