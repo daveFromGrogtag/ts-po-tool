@@ -13,7 +13,8 @@
 
 <body>
     <header>
-        <button id="googleSignInBtn">Google Sign In</button><a id="emailSignIn" href="./sign-in.html"><button>Email Sign In</button></a><button id="signOutBtn">Sign Out</button>
+        <button id="googleSignInBtn">Google Sign In</button><a id="emailSignIn" href="./sign-in.html"><button>Email Sign
+                In</button></a><button id="signOutBtn">Sign Out</button>
         <nav>
             <ul>
                 <li>
@@ -64,6 +65,33 @@
     <input type="file" name="image-selector" id="image-selector" />
     <script type="module" src="./firebase/auth-handler.js"></script>
     <script type="module" src="./order-script.js"></script>
+    <script>
+        function getQueryParamValue(paramName) {
+            let url = window.location.href;
+            // Create a URL object
+            let urlObj = new URL(url);
+
+            // Use the URLSearchParams API to get the value of the parameter
+            let params = new URLSearchParams(urlObj.search);
+
+            // Return the value of the specified parameter
+            return params.get(paramName);
+        }
+        const table = document.getElementById('content');
+        if (getQueryParamValue("delete-mode") == 'true') {
+            if (table) {
+                table.addEventListener('click', function (event) {
+                    // Find the closest <tr> to the click target within the table
+                    const tr = event.target.closest('tr');
+
+                    // Only remove the <tr> if it's a direct child of the table (ignore header rows etc.)
+                    if (tr && table.contains(tr)) {
+                        tr.remove();
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 
 </html>
