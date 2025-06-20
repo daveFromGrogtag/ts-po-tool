@@ -120,6 +120,7 @@ function dateCalculation() {
 
 function displayOrderInfo() {
     let orderId = getQueryParamValue("id")
+    document.title = "TS-" + orderId
     const orderInfo = document.getElementById("content")
     const orderStatus = document.getElementById("order-status")
     const rushCheck = document.getElementById("rush-check")
