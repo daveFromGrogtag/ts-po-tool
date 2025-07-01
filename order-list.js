@@ -3,7 +3,7 @@ import { query, collection, getDocs, where, orderBy } from "https://www.gstatic.
 
 function displayOrderList() {
     const orderList = document.getElementById("orderList")
-    const allOrders = query(collection(db, "orders"), orderBy("orderId"), where("status", "!=", "closed"))
+    const allOrders = query(collection(db, "orders"), orderBy("orderId"), where("status", "not-in", ["closed", "invoiced"]))
 
     getDocs(allOrders)
         .then((docs) => {
