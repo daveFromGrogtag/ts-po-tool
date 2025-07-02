@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extras</title>
+    <link rel="stylesheet" href="./style-2.css">
+    <script type="module" src="./firebase/auth-handler.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <h1>Extras</h1>
+        <button id="googleSignInBtn">Google Sign In</button><a id="emailSignIn" href="./sign-in.html"><button>Email Sign
+                In</button></a><button id="signOutBtn">Sign Out</button>
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="./index.html">Home</a>
+                </li>
+                <li>
+                    <a href="./order-list.html">Order-List</a>
+                </li>
+                <li>
+                    <a href="./bulk-shipping-updater.html">Updater</a>
+                </li>
+                <li>
+                    <a href="./ship-list.html">Invoice/Ship</a>
+                </li>
+                <li>
+                    <a href="./reprints.html">reprints</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="tool-bar">
+            <div>
+                <label for="">Item Id</label><br>
+                <input type="text" id="extraItemId">
+                <br>
+                <label for="">Item Location</label><br>
+                <input type="text" id="extraItemLocation">
+            </div>
+            <div>
+                <label for="">Item Size</label><br>
+                <input type="text" id="extraItemSize">
+                <br>
+                <label for="">Item Variation</label><br>
+                <input type="text" id="extraItemVariation">
+            </div>
+            <div>
+                <label for="">Qty of Item</label><br>
+                <input type="number" id="extraItemQty"><br>
+                <label for="">Thumbnail</label><br>
+                <input type="file" id="extraItemImageUrlInput">
+                <input type="hidden" id="extraItemImageUrl" value="./No-Image-01.png">
+            </div>
+            <button id="newExtra">Add Extras</button>
+        </div>
+    </header>
+    <table id="data-table">
+        <thead>
+            <tr>
+                <th colspan="7">
+                    <input type="text" id="searchInput" class="table-search-input" style="width: 100%; padding: 10px; box-sizing: border-box;"
+                        placeholder="Search by SKU, Name or Available...">
+                </th>
+            </tr>
+            <tr>
+            <th>Item Id</th>
+            <th>Item Location</th>
+            <th>Item Size</th>
+            <th>item Var</th>
+            <th>Qty</th>
+            <th>Img</th>
+            <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="extrasList">
+
+        </tbody>
+    </table>
+    <script type="module" src="./extras.js"></script>
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function () {
+            const filter = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#data-table tbody tr');
+
+            rows.forEach(row => {
+                const cells = row.getElementsByTagName('td');
+                let rowText = '';
+
+                // Combine text from all cells in the row
+                for (let cell of cells) {
+                    rowText += cell.textContent.toLowerCase() + ' ';
+                }
+
+                // Show or hide the row based on the search input
+                row.style.display = rowText.includes(filter) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+
+</html>

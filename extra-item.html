@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extras</title>
+    <link rel="stylesheet" href="./style-2.css">
+    <script type="module" src="./firebase/auth-handler.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <h1>Extras</h1>
+        <button id="googleSignInBtn">Google Sign In</button><a id="emailSignIn" href="./sign-in.html"><button>Email Sign In</button></a><button id="signOutBtn">Sign Out</button>
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="./index.html">Home</a>
+                </li>
+                <li>
+                    <a href="./order-list.html">Order-List</a>
+                </li>
+                <li>
+                    <a href="./extras.html">Back to Extras</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="tool-bar">
+            <input type="number" id="extraChangeQty">
+            <button id="extraAddQty">Add</button><button id="extraRemoveQty">Remove</button>
+        </div>
+    </header>
+    <table id="extra-edit">
+        <tr>
+            <th>Id</th>
+            <td><div id="extraItemId"></div></td>
+        </tr>
+        <tr>
+            <th>Location</th>
+            <td><div id="extraItemLocation"></div></td>
+        </tr>
+        <tr>
+            <th>Size</th>
+            <td><div id="extraItemSize"></div></td>
+        </tr>
+        <tr>
+            <th>Variation</th>
+            <td><div id="extraItemVariation"></div></td>
+        </tr>
+        <tr>
+            <th>Qty</th>
+            <td><div id="extraItemQty"></div></td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <td><div id="extraItemImage"></div></td>
+        </tr>
+    </table>
+    <script type="module" src="./extra-item.js"></script>
+</body>
+
+</html>
