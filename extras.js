@@ -25,10 +25,7 @@ function displayExtrasList() {
             let extrasListElements = `<tbody>`
             docs.forEach(extra => {
                 let extrasLink = `<tr>
-                <td>${extra.data().itemId}</td>
-                <td>${extra.data().itemLocation}</td>
-                <td>${extra.data().itemSize}</td>
-                <td>${extra.data().itemVariation}</td>
+                <td>${extra.data().itemSize} ${extra.data().itemId}-${extra.data().itemLocation} ${extra.data().itemVariation}</td>
                 <td>${extra.data().itemQty}</td>
                 <td><img style="width: auto; height: auto; max-height: 75px; max-width: 75px;"src="${extra.data().itemImageUrl}"/></td>
                 <td><a href="./extra-item.html?id=${extra.id}">Edit</a></td>
