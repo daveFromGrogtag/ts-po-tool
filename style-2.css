@@ -327,6 +327,38 @@ display: none;
     width: auto;
 }
 
+@media print {
+    #packing-list .table-image img {
+        height: 50px;
+        width: auto;
+    }
+    
+    #packing-list .packing-list-header img {
+        height: 50px;
+        width: auto;
+    }
+
+    #packing-list .packing-list-header {
+        text-align: left;
+    }
+
+    #packing-list .packing-list-header h1 {
+        font-size: 18px;
+        text-align: left;
+    }
+    #packing-list h2 {
+        font-size: 18px;
+        text-align: left;
+
+    }
+
+    #packing-list input#client-order-id {
+        font-size: 18px;
+        text-align: left;
+
+    }
+}
+
 .packing-list-header h1 {
     background-color: lightcoral;
 }
