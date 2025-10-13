@@ -39,6 +39,7 @@ function joinWithLineBreaks(arr, itemsPerLine) {
 }
 
 function joinAsHtmlTable(arr, itemsPerLine) {
+   
     let result = '<tr>';
     if (itemsPerLine === 6) {
         result = '<tr><th>Size</th><th>SKU</th><th>OS</th><th>Total</th><th>Price</th><th>Extended</th><th>Image</th><th>Notes</th></tr><tr>'
@@ -98,7 +99,7 @@ function splitArrayByRegex(arr, regex) {
 
 
 function textParse(text) {
-    let tableRegex = /Description [\w $\.\-\:\"\#\,\/\(\)]{1,}/;
+    let tableRegex = /Description [\w $\.\-\:\"\#\,\/\(\)\&]{1,}/;
     let tableHeaderRegex = /Description [\w $]{1,} Extended/
     let tableText = text.match(tableRegex);
     let tableHeaderText = text.match(tableHeaderRegex)
@@ -106,6 +107,8 @@ function textParse(text) {
     let tableAdditionalInstructionsRegex = /Additional Notes[\w \:\.\-\#\/\(\)]{0,}/
     let tableBodyText = tableText[0].replace(tableHeaderRegex, "").replace(tableTotalRegex, "").replace(tableAdditionalInstructionsRegex, "")
     let tableBodyArray = removeEmptyStrings(tableBodyText.split(" "))
+    console.log(text);
+    
     return tableBodyArray
 }
 
