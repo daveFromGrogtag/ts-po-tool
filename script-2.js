@@ -62,7 +62,7 @@ function joinAsHtmlTable(arr, itemsPerLine) {
         }
         return `<table id="item-data-table">${result}</table>`
     }
-    let unformattedTable = splitArrayByRegex(arr, /(?=[A-Z]\dX\d)/g)
+    let unformattedTable = splitArrayByRegex(arr, /(?=[A-Z]\dX\d)|(?=MMINI)/g)
     let formattedTable = ''
     unformattedTable.map(unRow => {
         newRow = ''

@@ -507,3 +507,22 @@ background: none;
     font-weight: 800;
     padding: 12px;
 }
+
+.no-po-form {
+    padding: 4rem;
+    background-color: #eee;
+    border-radius: .5rem;
+}
+
+.no-po-form label, .no-po-form input {
+ display: block;
+}
+
+.no-po-form label {
+    margin-top: 1rem;
+}
+
+.no-po-form input {
+    padding: .5rem;
+    width: 300px;
+}
