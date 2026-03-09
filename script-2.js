@@ -62,16 +62,28 @@ function joinAsHtmlTable(arr, itemsPerLine) {
         }
         return `<table id="item-data-table">${result}</table>`
     }
-    let unformattedTable = splitArrayByRegex(arr, /(?=[A-Z]\dX\d)|(?=MMINI)/g)
+    let unformattedTable = splitArrayByRegex(arr, /(?=[A-Z]\dX\d)|(?=MMINI)|(?=COA01)/g)
     let formattedTable = ''
     unformattedTable.map(unRow => {
+        console.log(unRow);
+        if (unRow.includes("CERAMIC") && unRow.includes("COASTER")) {
+            unRow.forEach((element, index) => {
+                if(element === "CERAMIC" || element === "COASTER") {
+                    unRow[index] = ""
+                }
+            });
+        }
         newRow = ''
         unRow.map(unCell => {
-            newRow += `<td>${unCell}</td>`
+            console.log(unCell);
+            
+            if (unCell !== "") {
+                newRow += `<td>${unCell}</td>`
+            }
         })
         formattedTable += `<tr>${newRow}<td><div class="table-image"><img src="./No-Image-01.png"></div></td><td></td></tr>`
     })
-    console.log(formattedTable);
+    // console.log(formattedTable);
     // return `<textarea>${unformattedTable.join("\r")}</textarea>`
     return `<table id="item-data-table"><tbody><tr><th>Size</th><th>SKU</th><th>OS</th><th>Total</th><th>Price</th><th>Extended</th><th>Image</th><th>Notes</th></tr><tr>${formattedTable}</tbody></table>`
 
