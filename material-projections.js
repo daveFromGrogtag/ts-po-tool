@@ -1,6 +1,11 @@
 import { db } from "./firebase/init.js"
 import { query, collection, getDocs, where, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+function numberFormat(qty) {
+    const formattedNumber = parseInt(qty.replaceAll(",", ""))
+    return formattedNumber
+}
+
 function displayOrderList() {
     const orderList = document.getElementById("orderList")
     const allOrders = query(collection(db, "orders"), orderBy("orderId"), where("status", "not-in", ["closed", "invoiced"]))
@@ -17,18 +22,18 @@ function displayOrderList() {
             docs.forEach(order => {
                 if (order.data().status == "open" || order.data().status == "pending" || order.data().status == "approved") {
                     if (order.data().productType == "stickers") {
-                        stickersCount += parseInt(order.data().totalQuantity) 
+                        stickersCount += numberFormat(order.data().totalQuantity)
                     }
 
                     if (order.data().productType == "coasters") {
-                        coastersCount += parseInt(order.data().totalQuantity) 
+                        coastersCount += numberFormat(order.data().totalQuantity) 
                     }
 
                     if (order.data().productType == "acrylic") {
-                        acrylicCount += parseInt(order.data().totalQuantity) 
+                        acrylicCount += numberFormat(order.data().totalQuantity) 
                     }
                     if (order.data().productType == "sign") {
-                        signCount += parseInt(order.data().totalQuantity) 
+                        signCount += numberFormat(order.data().totalQuantity) 
                     }
                 }
 
