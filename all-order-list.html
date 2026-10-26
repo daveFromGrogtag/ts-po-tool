@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order List</title>
+    <link rel="stylesheet" href="./style-2.css">
+    <script type="module" src="./firebase/auth-handler.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <h1>Order List</h1>
+        <button id="googleSignInBtn">Google Sign In</button><a id="emailSignIn" href="./sign-in.html"><button>Email Sign In</button></a><button id="signOutBtn">Sign Out</button>
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="./index.html">Home</a>
+                </li>
+                <li>
+                    <a href="./order-list.html">Order-List</a>
+                </li>
+                <li>
+                    <a href="./bulk-shipping-updater.html">Updater</a>
+                </li>
+                <li>
+                    <a href="./invoicer.html">Invoicer</a>
+                </li>
+                <li>
+                    <a href="./reprints.html">reprints</a>
+                </li>
+                <li>
+                    <a href="./material-projections.html">MatProj</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="tool-bar">
+            <div id="reprintTool"></div>
+            <!-- <button onclick="exportTableToExcel('item-data-table', 'myExcelFile')">Excel</button>
+            <button onclick="downloadPDF()">PDF</button>
+            <button id="saveOrderButton">Save Order</button> -->
+        </div>
+    </header>
+    <table id="orderList"></table>
+    <button id="sortTableNow">Sort Table Now</button>
+    <script type="module" src="./all-order-list.js"></script>
+    <script>
+        // Sorry future dave, but I needed to sort this page by due date
+        // I hope this isn't too much of a pain in the ass in the future
+        function sortTableBySeventhColumn(tableId) {
+            let table = document.getElementById(tableId);
+            console.log(table);
+            
+            let tbody = table.querySelector("tbody");
+            let rows = Array.from(tbody.rows);
+            
+            rows.sort((rowA, rowB) => {
+                let cellA = rowA.cells[7]?.textContent.trim() || "";
+                let cellB = rowB.cells[7]?.textContent.trim() || "";
+
+                // Move special characters (like '-') to the end for sorting
+                const normalize = (str) => str.replace(/^([-]+)/, 'ZZZZ');
+
+                return normalize(cellA).localeCompare(normalize(cellB));
+            });
+            
+            rows.forEach(row => tbody.appendChild(row));
+        }
+        document.getElementById("sortTableNow").addEventListener("click", () => {
+            sortTableBySeventhColumn("orderList")
+        })
+    </script>
+</body>
+
+</html>

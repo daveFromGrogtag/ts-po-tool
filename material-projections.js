@@ -8,7 +8,7 @@ function numberFormat(qty) {
 
 function displayOrderList() {
     const orderList = document.getElementById("orderList")
-    const allOrders = query(collection(db, "orders"), orderBy("orderId"), where("status", "not-in", ["closed", "invoiced"]))
+    const allOrders = query(collection(db, "orders"), orderBy("orderId"), where("status", "not-in", ["closed", "invoiced", "shipped"]))
 
     getDocs(allOrders)
         .then((docs) => {
@@ -25,8 +25,16 @@ function displayOrderList() {
                         stickersCount += numberFormat(order.data().totalQuantity)
                     }
 
+                    if (order.data().productType == "magnets") {
+                        magnetCount += numberFormat(order.data().totalQuantity)
+                    }
+
                     if (order.data().productType == "coasters") {
                         coastersCount += numberFormat(order.data().totalQuantity) 
+                    }
+
+                    if (order.data().productType == "mdf") {
+                        mdfCount += numberFormat(order.data().totalQuantity) 
                     }
 
                     if (order.data().productType == "acrylic") {
@@ -44,7 +52,9 @@ function displayOrderList() {
             const materialsTable = `<div>
             <hr>
             Stickers => ${stickersCount} or ${Math.ceil(stickersCount/4000)} rolls<hr>
+            Magnets => ${magnetCount} or ${Math.ceil(magnetCount/1800)} rolls<hr>
             Acrylics => ${acrylicCount} or ${Math.ceil(acrylicCount/100)} small sheets or ${Math.ceil(acrylicCount/400)} full sheets<hr>
+            MDF => ${mdfCount} or ${Math.ceil(mdfCount/100)} small sheets or ${Math.ceil(mdfCount/400)} full sheets<hr>
             Coasters => ${coastersCount} or ${Math.ceil(coastersCount/25)} boxes<hr>
             Signs => ${signCount} or ${Math.ceil(signCount/25)} full sheets<hr>
             </div>`

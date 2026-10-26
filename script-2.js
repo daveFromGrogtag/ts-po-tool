@@ -62,7 +62,7 @@ function joinAsHtmlTable(arr, itemsPerLine) {
         }
         return `<table id="item-data-table">${result}</table>`
     }
-    let unformattedTable = splitArrayByRegex(arr, /(?=[A-Z]\dX\d)|(?=MMINI)|(?=COA01)/g)
+    let unformattedTable = splitArrayByRegex(arr, /(?=[A-Z]\dX\d)|(?=SLHOLO)|(?=MMINI)|(?=COA01)/g)
     let formattedTable = ''
     unformattedTable.map(unRow => {
         console.log(unRow);
@@ -116,7 +116,7 @@ function textParse(text) {
     let tableText = text.match(tableRegex);
     let tableHeaderText = text.match(tableHeaderRegex)
     let tableTotalRegex = /Total [\w \.\,]{1,}/
-    let tableAdditionalInstructionsRegex = /Additional Notes[\w \:\.\-\#\/\(\)]{0,}/
+    let tableAdditionalInstructionsRegex = /A[ ]{0,}dditional Notes[\w \:\.\-\#\/\(\)]{0,}/
     let tableBodyText = tableText[0].replace(tableHeaderRegex, "").replace(tableTotalRegex, "").replace(tableAdditionalInstructionsRegex, "")
     let tableBodyArray = removeEmptyStrings(tableBodyText.split(" "))
     console.log(text);

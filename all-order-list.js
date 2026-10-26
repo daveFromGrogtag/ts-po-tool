@@ -1,0 +1,34 @@
+import { db } from "./firebase/init.js"
+import { query, collection, getDocs, where, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+function displayOrderList() {
+    const orderList = document.getElementById("orderList")
+    // const allOrders = query(collection(db, "orders"), orderBy("orderId"), where("status", "not-in", ["closed", "invoiced"]))
+    const allOrders = query(collection(db, "orders"), orderBy("orderId"))
+
+
+    getDocs(allOrders)
+        .then((docs) => {
+            let allOrdersJson = []
+            docs.forEach(order => {
+                let orderObj = {
+                    "orderId": order.data().orderId,
+                    "productType": order.data().productType || "?",
+                    "totalQuantity": order.data().totalQuantity || "?"
+                }
+                allOrdersJson.push(orderObj)                
+            });
+            console.log(allOrdersJson);
+            
+            // let orderListElements = '<thead><tr><th>Order Id</th><th>Order Status</th><th>QTY</th><th>Product</th><th>Notes</th><th>UPC</th><th>Total</th><th>App Date</th><th>Due Date</th><th>Packing Slip</th></tr></thead><tbody>'
+            // docs.forEach(order => {
+            //   let rushStatus = order.data().rush ? " rush" : ""
+            //     let orderLink = `<tr class="${order.data().status}${rushStatus}"><td><a href="./order.html?id=${order.id}">${order.id}</a></td><td>${order.data().status}${rushStatus}</td><td>${order.data().totalQuantity}</td><td>${order.data().productType}</td><td>${order.data().orderNotes?order.data().orderNotes:""}</td><td>${order.data().upc?"UPC":"-"}</td><td>${order.data().totalPrice?order.data().totalPrice:"-"}</td><td>${order.data().approvalDate ? order.data().approvalDate : "-"}</td><td>${order.data().dueDate ? order.data().dueDate : "-"}</td><td><a href="./packing-list.html?id=${order.id}">Slip</a></td></tr>`
+            //     orderListElements += orderLink
+            // })
+            // orderListElements + "</tbody>"
+            // orderList.innerHTML = orderListElements
+        })
+}
+
+displayOrderList()
