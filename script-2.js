@@ -163,14 +163,14 @@ function getPoData(text) {
     const poDateRegex = /PO Date[ ]{1,}[\w\d\/]{1,}/
     const vendorRegex = /Vendor#[ ]{1,}[\w\d]{1,}/
     const enteredByRegex = /Entered By[ ]{1,}[\w\d]{1,}/
-    const additionalInstructionsRegex = /Additional Notes[\w \:\.\-\#\/\(\)"]{0,}/
+    const additionalInstructionsRegex = /A[ ]{0,}dditional Notes[\w \:\.\-\#\/\(\)]{0,}/
     const tableTotalRegex =/Total[\s]{1,}[0-9\,]{1,}[\s]{1,}[0-9\.\,]{1,}/
 
     let orderNumber = text.match(orderNumberRegex)[0].replace(/Order#[ ]{1,}/, "")
     let poDate = text.match(poDateRegex)[0].replace(/PO Date[ ]{1,}/, "")
     let vendor = text.match(vendorRegex)[0].replace(/Vendor#[ ]{1,}/, "")
     let enteredBy = text.match(enteredByRegex)[0].replace(/Entered By[ ]{1,}/, "")
-    let additionalInstructions = text.match(additionalInstructionsRegex) ? text.match(additionalInstructionsRegex)[0].replace(/Total [\w \.]{1,}/, "").replace(/Additional Notes:[ ]{0,}/, "") : ""
+    let additionalInstructions = text.match(additionalInstructionsRegex) ? text.match(additionalInstructionsRegex)[0].replace(/Total [\w \.]{1,}/, "").replace(/A[ ]{0,}dditional[ ]{0,}Notes[ ]{0,}:[ ]{0,}/, "") : ""
     let tableTotal = text.match(tableTotalRegex)[0].split(/[\s]{1,}/)
     let tableTotalQty = tableTotal[1]
     let tableTotalPrice = tableTotal[2] ? `$${tableTotal[2]}` : ''
